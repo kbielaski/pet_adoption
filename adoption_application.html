@@ -1,30 +1,136 @@
 <html>
-	<head>
+<head>
 	<title>pet adoption</title>
-	</head>
-	Adopt Joe Bruin
-	<center>
-	<form action="pet_profile.html">
-	<table>
-		<tr>
-			<th>this is the results table</th>
-		</tr>
-		</tr>
-			<td>First Name <input type="text"/></td>
-		</tr>
-		</tr>
-                        <td>Last Name <input type="text"/></td>
-                </tr>
-		</tr>
-                        <td>Phone Number <input type="text"/></td>
-                </tr>
-		</tr>
-                        <td>Availability <input type="date"/></td>
-                </tr>
-	</table>
+	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
+
+</head>
+<body>
+	
+	<div class="navbar">
+		<ul class="navbar-container">
+			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<li class="nav-item">
+				<a href="login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<h1>Adopt Joe Bruin</h1>
+
+
+	<div class="grid_container">
+		<div class="grid_item1">
+		<table>
+			<tr>
+				<td>First Name <input type="text"/></td>
+			</tr>
+			<tr>
+	            <td>Last Name <input type="text"/></td>
+	        </tr>
+			<tr>
+	            <td>Phone Number <input type="text"/></td>
+	        </tr>
+	        <tr>
+	            <td>Email <input type="email"/></td>
+	        </tr>
+	        <tr>
+	            <td>Address <input type="text"/></td>
+	        </tr>
+	        <tr>
+	            <td>Form of Interview:</td>
+	            <tr>
+	        	<td>
+	            	<input id="inPerson" type="checkbox" name="radio" value="inPerson"> In Person
+          			<input id="phoneCall" type="checkbox" name="radio" value="phoneCall"> Phone Call
+          			<input id="videoCall" type="checkbox" name="radio" value="videoCall"> Video Call
+	            </td>
+	        </tr>
+	        </tr>
+			<tr>
+	            <td>Availability / Preferred Time Slots: </td>
+	        </tr>
+	        <tr>
+	        	<td>
+	        		First
+	        		<select>
+	        			<option disabled selected value> -- select a day -- </option>
+  						<option value="Monday">Monday</option>
+  						<option value="Tuesday">Tuesday</option>
+  						<option value="Wednesday">Wednesday</option>
+  						<option value="Thursday">Thursday</option>
+  						<option value="Friday">Friday</option>
+					</select>
+					<select>
+						<option disabled selected value> -- select a time slot-- </option>
+  						<option value="9-10">9:00 am-10:00 am</option>
+  						<option value="10-11">10:00 am-11:00 am</option>
+  						<option value="11-12">11:00 am-12:00 pm</option>
+  						<option value="14-15">2:00 pm-3:00 pm</option>
+  						<option value="15-16">3:00 pm-4:00 pm</option>
+  						<option value="16-17">4:00 pm-5:00 pm</option>
+					</select><br>
+					Second
+	        		<select>
+	        			<option disabled selected value> -- select a day -- </option>
+  						<option value="Monday">Monday</option>
+  						<option value="Tuesday">Tuesday</option>
+  						<option value="Wednesday">Wednesday</option>
+  						<option value="Thursday">Thursday</option>
+  						<option value="Friday">Friday</option>
+					</select>
+					<select>
+						<option disabled selected value> -- select a time slot-- </option>
+  						<option value="9-10">9:00 am-10:00 am</option>
+  						<option value="10-11">10:00 am-11:00 am</option>
+  						<option value="11-12">11:00 am-12:00 pm</option>
+  						<option value="14-15">2:00 pm-3:00 pm</option>
+  						<option value="15-16">3:00 pm-4:00 pm</option>
+  						<option value="16-17">4:00 pm-5:00 pm</option>
+					</select><br>
+					Third
+	        		<select>
+	        			<option disabled selected value> -- select a day -- </option>
+  						<option value="Monday">Monday</option>
+  						<option value="Tuesday">Tuesday</option>
+  						<option value="Wednesday">Wednesday</option>
+  						<option value="Thursday">Thursday</option>
+  						<option value="Friday">Friday</option>
+					</select>
+					<select>
+						<option disabled selected value> -- select a time slot-- </option>
+  						<option value="9-10">9:00 am-10:00 am</option>
+  						<option value="10-11">10:00 am-11:00 am</option>
+  						<option value="11-12">11:00 am-12:00 pm</option>
+  						<option value="14-15">2:00 pm-3:00 pm</option>
+  						<option value="15-16">3:00 pm-4:00 pm</option>
+  						<option value="16-17">4:00 pm-5:00 pm</option>
+					</select><br>
+	            </td>
+	        </tr>
+		</table>
+		</div>
+
+
+		<div class="grid_item2">
+			<p class="ques">Why you want to adopt this Joe Bruin?</p>
+			<textarea name="reason" cols="40" rows="5"></textarea>
+			<p class="ques">Any questions regarding to Joe Bruin?</p>
+			<textarea name="pet-ques" cols="40" rows="5"></textarea>
+		</div>
+
+	</div>
+	<br>
+	<div class="button-line">
+	<form action="search_page.html">
+        <input class="button" type="submit" value="Search Again"/>
+    </form>
+    <form action="pet_profile.html">
+		<input class="button" type="submit" value="Back"/>
 	</form>
-	</center>
-<form action="search_page.html">
-        <input type="submit" value="back to search"/>
-        </form>
+	<form>
+		<input class="button" type="submit" value="Next"/>
+	</form>
+	</div>
+</body>
 </html>
