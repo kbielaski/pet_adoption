@@ -14,6 +14,52 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-before: 0;
+  -webkit-padding-start: 0;
+  -webkit-padding-end: 0;
+  -webkit-padding-after: 0;
+  border: 0;
+}
+
+legend {
+  margin: 0;
+  padding: 0;
+  display: block;
+  -webkit-padding-start: 0;
+  -webkit-padding-end: 0;
+}
+
+
 form legend {
   font-size: 36px;
   color: #fff;
@@ -23,7 +69,7 @@ form legend {
 }
 form .inner-form {
   width: 40%;
-  margin-left:30%;
+  margin-left: 30%;
   top:50%;
   position:absolute;
   -ms-transform: translateY(-50%);
@@ -57,21 +103,21 @@ form .inner-form .input-field input:hover, .s006 form .inner-form .input-field i
 }
 .search-button{
   color: #ee6e73;
-  background: url("icons8-search-26.png");
   border:0;
   display: block;
 }
 
 form .inner-form .input-field .btn-search {
-  width: 70px;
+  color: white;
+  background-color: #ee6e73;
+  width: 100px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  left: 0;
+  right: 0;
   height: 100%;
-  background: url("icons8-search-26.png");
   border: 0;
   padding: 0;
   cursor: pointer;
@@ -81,8 +127,51 @@ form .inner-form .input-field .btn-search {
   align-items: center;
 }
 
+form .inner-form .input-field .btn-image {
+  color: white;
+  background-color: #ee6e73;
+  width: 150px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  border: 0;
+  padding: 20;
+  top: 75;
+  cursor: pointer;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  align-items: center;
+}
+
+form .inner-form .input-field .btn-adv {
+  color: white;
+  background-color: #ee6e73;
+  width: 100px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  position: absolute;
+  right: 175;
+  top: 75;
+  height: 100%;
+  border: 0;
+  padding: 20;
+  cursor: pointer;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  align-items: center;
+
+}
+
+
 form .inner-form .input-field .btn-search svg {
-  fill: #ee6e73;
   width: 30px;
   height: 30px;
   transition: all .2s ease-out, color .2s ease-out;
