@@ -2,6 +2,23 @@ body, html {
     height: 100%;
 }
 
+th {
+  position: relative;
+}
+td {
+  position: relative;
+  background-color: white;
+}
+
+.results {
+  background-color: gray;
+}
+
+.bio {
+  top: 10%;
+  font-size: 20px;
+}
+
 .bg {
     /* The image used */
     background-image: url("cat_and_dog.png");
@@ -14,10 +31,21 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+table {
+  position: relative;
+}
+.bio {
+    position: relative;
+    width: 500;
+    margin-left: auto;
+    margin-right: auto;
+}
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
-
+.results-profile-pic {
+  float: right;
+}
 /**
  * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
@@ -75,11 +103,26 @@ form .inner-form {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+form .inner-form.pet-profile-adopt {
+ margin-left:0;
+ top: auto;
+}
+
+form .inner-form.results-page {
+  top:8.5%;
+  min-height: 100;
+  margin-left:0;
+}
+form .inner-form.results-page.back {
+  bottom: 0;
+}
+
 form .inner-form .input-field {
   height: 70px;
   width: 100%;
   position: relative;
 }
+
 form .inner-form .input-field input {
   height: 100%;
   width: 100%;
@@ -125,6 +168,12 @@ form .inner-form .input-field .btn-search {
   -ms-flex-pack: center;
       justify-content: center;
   align-items: center;
+}
+
+form .inner-form .input-field .btn-search.btn-pet-profile {
+  width: 200;
+  left: 50%;
+  right: 50%;
 }
 
 form .inner-form .input-field .btn-image {
