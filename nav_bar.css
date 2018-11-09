@@ -2,6 +2,22 @@ body, html {
     height: 100%;
 }
 
+th {
+  background-color: gray;
+}
+td {
+  top: 60;
+  background-color: white;
+}
+
+.results {
+  background-color: gray;
+}
+
+.bio {
+  font-size: 20px;
+}
+
 .bg {
     /* The image used */
     background-image: url("cat_and_dog.png");
@@ -17,7 +33,9 @@ body, html {
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
-
+.results-profile-pic {
+  float: right;
+}
 /**
  * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
@@ -75,11 +93,20 @@ form .inner-form {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+form .inner-form.results-page {
+  top:5%;
+  margin-left:0;
+}
+form .inner-form.results-page.back {
+  bottom: 0;
+}
+
 form .inner-form .input-field {
   height: 70px;
   width: 100%;
   position: relative;
 }
+
 form .inner-form .input-field input {
   height: 100%;
   width: 100%;
