@@ -1,6 +1,31 @@
 <link href="./nav_bar.css" rel="stylesheet"/>
+<link href="./cards_all.css" rel="stylesheet" />
+<link href="./cards.css" rel="stylesheet" />
+<script src="./cards.js"></script>
+
 <html>
 	<head>
+	<!--<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		let cardTransitionTime = 500;
+		let switching = false
+
+		//$('#btn').click(flipCard)
+
+		function flipCard () {
+   			if (switching) {
+      				return false
+   			}
+   			switching = true
+			
+   			$('.js-card').toggleClass('is-switched')
+   			window.setTimeout(function () {
+				$('.js-card').children().children().toggleClass('is-active')
+      				switching = false
+   			}, cardTransitionTime / 2)
+		}
+	</script>-->
+
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
 	</head>
@@ -12,29 +37,48 @@
                         </li>
                 </ul>
         </div>
-<!--<<<<<<< HEAD
-	<body class="results">
-	<div class="navbar">
-                <ul class="navbar-container">
-                        <li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
-                        <li class="nav-item">
-                                <a href="login/login.html" class="left-underline nav-button" data-scroll>Login</a>
-                        </li>
-                </ul>
-        </div>
-=======
-	<div class="navbar">
-		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
-			<li class="nav-item">
-			
-			</li>
-		</ul>
-	</div>
-	<h1>Adopt Joe Bruin</h1>
+	<body>
+	
+	<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="joe_the_bruin.png" alt="Avatar" style="width:300px;height:300px;">
+    </div>
+    <div class="flip-card-back">
+      <h1>John Doe</h1> 
+      <p>Architect & Engineer</p> 
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div>
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="joe_the_bruin.png" alt="Avatar" style="width:300px;height:300px;"
+>
+    </div>
+    <div class="flip-card-back">
+      <h1>John Doe</h1>
+      <p>Architect & Engineer</p>
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div>
+	<!--<div class="card js-card">
+		<div class="card__wrapper" onclick="flipCard()">
+			<div id="front" class="card__side is-active">
+				<img src="joe_the_bruin.png" width=200 height=140 />
+			</div>
+			<div id="back" class="card__side card__side--back">
+				<a href="pet_profile.html" >Joe Bruin</a> is a friendly bear. <br>
+                                He is 6'0" and is a UCLA fanatic. Joe enjoys cheering for <br>
+                                the Bruins and barking at the Trojans. Joe's favorite treat <br>
+                                is salmon.
+			</div>
+		</div>
+	</div>-->	
 
-	hello this is the results page
->>>>>>> 761f0583051f07c9a7d8c322d9b34ccb4e58f4a3-->
+	<!--
 	<center>
 	<form action="pet_profile.html">
 	<table>
@@ -49,11 +93,6 @@
                                         <input id="search" type="text" placeholder="" value=""/>
                                 </div>
                         </div>
-                        <!--<div class="suggestion-wrap">
-                                <span>Doesn't Shed</span>
-                                <span>Loyal</span>
-                                <span>Labradoodle</span>
-                        </div>-->
                 	</fieldset>
 			</th>
 		</tr>
@@ -133,12 +172,7 @@
                                         <input id="search" type="text" placeholder="" value=""/>
                                 </div>
                         </div>
-                        <!--<div class="suggestion-wrap">
-                                <span>Doesn't Shed</span>
-                                <span>Loyal</span>
-                                <span>Labradoodle</span>
-                        </div>-->
 </fieldset>
-</form>
+</form>-->
 	</body>
 </html>
