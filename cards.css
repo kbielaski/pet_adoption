@@ -3,14 +3,18 @@
   margin: 50 20 50 20;
   position: relative;
   background-color: transparent;
-  width: 300;
-  height: 300;
+  width: 320;
+  height: 400;
+}
+
+img {
+  margin: 10 10 10 10;
 }
 
 .flip-card-inner {
   position: relative;
-  width: 300;
-  height: 300;
+  width: 320;
+  height: 400;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -23,20 +27,28 @@
 
 .flip-card-front, .flip-card-back {
   position: absolute;
-  width: 300;
-  height: 300;
+  width: 320;
+  height: 400;
   backface-visibility: hidden;
 }
 
 .flip-card-front {
-  background-color: #bbb;
+  background-color: white;
   color: black;
   z-index: 2;
 }
 
 .flip-card-back {
-  background-color: #2980b9;
-  color: white;
+  background-color: white;
+  color: gray;
   transform: rotateY(180deg);
   z-index: 1;
+}
+
+.pet-name-title {
+  color: gray;
+  font-family: "Georgia";
+  font-size: 30px;
+  font-style: bold;
+  margin: 25 25 25 25;
 }
