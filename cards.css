@@ -52,3 +52,13 @@ img {
   font-style: bold;
   margin: 25 25 25 25;
 }
+
+.pet-bio-body {
+  font-size: 20;
+  margin: 10% 10% 10% 10%;
+}
+
+.flip-card-results {
+  left: auto;
+  right: auto;
+}
