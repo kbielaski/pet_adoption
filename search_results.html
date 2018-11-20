@@ -1,41 +1,188 @@
+<link href="./nav_bar.css" rel="stylesheet"/>
+<link href="./cards_all.css" rel="stylesheet" />
+<link href="./cards.css" rel="stylesheet" />
+<script src="./cards.js"></script>
+
 <html>
 	<head>
+	<form action="search_results.html">
+                <fieldset>
+                        <legend>What are you looking for?</legend>
+                        <div class="inner-form results-page">
+                                <div class="input-field results">
+                                        <input type="submit" value="Search" class="btn btn-success btn-search">
+                                        </input>
+                                        <input id="search" type="text" placeholder="" value=""/>
+                                </div>
+                        </div>
+                        <!--<div class="suggestion-wrap">
+                                <span>Doesn't Shed</span>
+                                <span>Loyal</span>
+                                <span>Labradoodle</span>
+                        </div>-->
+                </fieldset>
+        </form>
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
 	</head>
 	<div class="navbar">
-		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
-			<li class="nav-item">
-				<!-- <a href="login/login.html" class="left-underline nav-button" data-scroll>Login</a> -->
-			</li>
-		</ul>
+                <ul class="navbar-container">
+                        <li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+                        <li class="nav-item">
+                                <a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+                        </li>
+                </ul>
+        </div>
+	<body>
+	<div class="flip-card-results">	
+	<div class="flip-card">
+  		<div class="flip-card-inner">
+    			<div class="flip-card-front">
+      				<img src="joe_the_bruin.png" alt="Avatar" style="width:300px;height:300px;">
+      				<p class="pet-name-title">Joe Bruin</p>
+    			</div>
+    			<div class="flip-card-back">
+      				<h1><a href="pet_profile.html">John Doe</a></h1> 
+      				<p class="pet-bio-body">Joe Bruin is a friendly bear. He is a UCLA fanatic. Joe enjoys cheering for the Bruins and roaring at the Trojans. Joe's favorite treat is salmon</p>
+    			</div>
+  		</div>
 	</div>
-	<h1>Adopt Joe Bruin</h1>
+	
 
-	hello this is the results page
-	<center>
-	<form action="pet_profile.html">
-	<table>
-		<tr>
-			<th>this is the results table</th>
-		</tr>
-		</tr>
-			<td>elem in table <input type="submit"/></td>
-		</tr>
-		</tr>
-                        <td>elem in table <input type="submit"/></td>
-                </tr>
-		</tr>
-                        <td>elem in table <input type="submit"/></td>
-                </tr>
-		</tr>
-                        <td>elem in table <input type="submit"/></td>
-                </tr>
-	</table>
-	</form>
-	</center>
-<form action="search_page.html">
-        <input type="submit" value="back to search"/>
-        </form>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="dog_on_grass.png" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Chester</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Chester</a></h1>
+                                <p class="pet-bio-body">Chester is a lovable dog.
+                                He was found enjoys rolling in the grass, long strolls
+                                through the park, and meeting new dogs. Chester is loyal
+                                and loves attention.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="disappointed_dog.png" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Laura</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Laura</a></h1>
+                                <p class="pet-bio-body">Laura is a sassy dog. Even
+                                though she will pretend not to need you, she notices when you
+                                are gone and keeps an eye on you to make sure that you are
+                                okay.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="bunny.png" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Bruce</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Bruce</a></h1>
+                                <p class="pet-bio-body">Bruce is an adrenaline junky. He enjoys
+                                spinning his wheel as fast as it will go and jumping off of
+                                cages. His favorite snack is carrots and hummus.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="small_dog.png" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Sasha</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Sasha</a></h1>
+                                <p class="pet-bio-body">Sasha is a young dog. She barks
+                                a lot for protection and loves to roll around in the grass.
+                                Her favorite things to do are go to the beach, go on long walks,
+                                and watch episodes of Friends.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="bunny.jpg" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Thumper</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Thumper</a></h1>
+                                <p class="pet-bio-body">Thumper is a yoga instructor. She
+				loves Whole Foods but hates when the bundles of kale
+				are too thick. She loves vegan carrots and soy lattes.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="cat.jpg" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Sir Meow-a-lot</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Sir Meow-a-lot</a></h1>
+                                <p class="pet-bio-body">Sir Meow-a-lot is a fun-loving
+				cat. He claims any yarn ball to use  
+				as a prop for his interpretive dancing. 
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="turtle.jpg" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Swim Shady</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Swim Shady</a></h1>
+                                <p class="pet-bio-body">Swim Shady says that he never
+				played a role in a popular Disney movie. However,
+				he loves to tell of his stories of his adventures
+				riding the East Austrailian Current for over a 
+				hundred years.
+				</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="guineapig.jpeg" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Spike</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Spike</a></h1>
+                                <p class="pet-bio-body">Joe Bruin is a friendly bear. He is a UCLA fanatic. Joe enjoys cheering for the Bruins and roaring at the Trojans. Joe's favorite treat is salmon</p>
+                        </div>
+                </div>
+        </div>
+	<div class="flip-card">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                                <img src="dog.jpg" alt="Avatar" style="width:300px;height:300px;">
+                                <p class="pet-name-title">Petunia</p>
+                        </div>
+                        <div class="flip-card-back">
+                                <h1><a href="pet_profile.html">Petunia</a></h1>
+                                <p class="pet-bio-body">Joe Bruin is a friendly bear. He is a UCLA fanatic. Joe enjoys cheering for the Bruins and roaring at the Trojans. Joe's favorite treat is salmon</p>
+                        </div>
+                </div>
+        </div>
+	</div>
+	</body>
 </html>
