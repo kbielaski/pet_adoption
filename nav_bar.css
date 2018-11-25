@@ -135,7 +135,7 @@ form .inner-form .input-field input {
   background: #fff;
   display: block;
   width: 100%;
-  padding: 10px 32px 10px 70px;
+  padding: 10px 32px 10px 15px;
   font-size: 18px;
   color: #666;
   border-radius: 34px;
@@ -163,7 +163,7 @@ form .inner-form .input-field .btn-search {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 0;
+  right: -105;
   height: 100%;
   border: 0;
   padding: 0;
@@ -199,7 +199,7 @@ form .inner-form .input-field .btn-image {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 0;
+  right: -105;
   height: 100%;
   border: 0;
   padding: 20;
@@ -220,7 +220,7 @@ form .inner-form .input-field .btn-adv {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 175;
+  right: 70;
   top: 75;
   height: 100%;
   border: 0;
