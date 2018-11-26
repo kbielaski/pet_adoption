@@ -1,0 +1,131 @@
+.card {
+  -webkit-perspective: 600px;
+          perspective: 600px;
+  position: relative;
+    
+}
+.card.is-switched .card__wrapper {
+  -webkit-animation: rotate 0.5s linear both;
+          animation: rotate 0.5s linear both;
+}
+
+.card__wrapper {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-animation: rotate-inverse 0.5s linear both;
+          animation: rotate-inverse 0.5s linear both;
+}
+
+.card__side {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200;
+  width: 100%;
+}
+.card__side.is-active {
+  position: static;
+}
+
+.card__side--back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  70% {
+    -webkit-transform: rotateY(200deg);
+            transform: rotateY(200deg);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  70% {
+    -webkit-transform: rotateY(200deg);
+            transform: rotateY(200deg);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+}
+@-webkit-keyframes rotate-inverse {
+  0% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  70% {
+    -webkit-transform: rotateY(-20deg);
+            transform: rotateY(-20deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+}
+@keyframes rotate-inverse {
+  0% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+  70% {
+    -webkit-transform: rotateY(-20deg);
+            transform: rotateY(-20deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.card {
+  margin: 2rem auto;
+  max-width: 350px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card__side {
+  padding: 1em;
+  border-radius: 5px;
+  color: gray;
+  background: rgba(0,0,0,.1);
+}
+
+.card__side--back {
+}
+
+.title {
+  color: #fff;
+}
+

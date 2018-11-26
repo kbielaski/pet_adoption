@@ -58,6 +58,11 @@ img {
   margin: 10% 10% 10% 10%;
 }
 
+.pet-keywords-body {
+  font-size: 15;
+  margin: 10% 10% 10% 10%;
+}
+
 .flip-card-results {
   left: auto;
   right: auto;
