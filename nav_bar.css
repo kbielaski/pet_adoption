@@ -10,7 +10,6 @@ td {
   background-color: white;
 }
 
-
 .bio {
   top: 10%;
   font-size: 20px;
@@ -107,8 +106,12 @@ form .inner-form.pet-profile-adopt {
 form .inner-form.results-page {
   top:130;
   min-height: 100;
-  left: auto;
+  margin-left: auto;
 }
+ui {
+  color: red;
+}
+
 form .inner-form.results-page.back {
   bottom: 0;
 }
@@ -116,7 +119,7 @@ form .inner-form.results-page.back {
 form .inner-form .input-field {
   height: 70px;
   width: 100%;
-  position: relative;
+  position: absolute;
 }
 
 form .inner-form .input-field.results {
@@ -125,6 +128,7 @@ form .inner-form .input-field.results {
   border-radius: 34px;
   margin-left: auto;
   margin-right: auto;
+  position: auto;
 }
 
 form .inner-form .input-field input {

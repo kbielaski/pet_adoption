@@ -1,4 +1,45 @@
 <link href="./nav_bar.css" rel="stylesheet"/>
+<link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
+<script src="jquery/js/jquery-1.9.0.min.js"></script>
+<script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+var config = {
+    apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
+    authDomain: "pet-7ba63.firebaseapp.com",
+    databaseURL: "https://pet-7ba63.firebaseio.com",
+    projectId: "pet-7ba63",
+    storageBucket: "pet-7ba63.appspot.com",
+    messagingSenderId: "862948521361"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+  var selectedPetRef = db.ref("selectedPet");
+  var petIdsRef = db.ref("petIds");
+
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+
+  selectedPetRef.on("value", function(snapshot) {
+	var selectedPetIndex = snapshot.val()["selectedPet"];
+	petIdsRef.child(selectedPetIndex).on("value", function(snapshot) {
+		console.log(snapshot.val());
+		var selectedPetData = snapshot.val();
+		var profilePicElem = document.getElementById("profile-pic");
+
+        	var spaceRef = storageRef.child(selectedPetData["img"]);
+        	var path = spaceRef.fullPath;
+        	var gsReference = storage.refFromURL("gs://pet-7ba63.appspot.com");
+		storageRef.child(selectedPetData["img"]).getDownloadURL().then(function(url) {
+                	profilePicElem.src = url;
+        	});
+        	var petBioElem = document.getElementById("pet-bio");
+        	petBioElem.innerHTML = "\t" +selectedPetData["bio"];
+	});	
+  });
+
+</script>
+
 <html>
 	<head>
 	<title>pet adoption</title>
@@ -12,8 +53,9 @@
                 </ul>
         </div>
         <div class="bio">
-	<img src="joe_the_bruin.png" class="results-profile-pic" width=300 height=300 />
-	&nbsp; This is Joe Bruin's bio. Lorem ipsum dolor sit amet, clita erroribus cum et. Zril graeci corrumpit an duo. Quo vide oporteat legendos cu. Ei quo fastidii officiis, id usu dico ubique, meis decore albucius ius te.
+	<img id="profile-pic" class="results-profile-pic" width=300 height=300 />
+	<p id="pet-bio"> </p>
+	&nbsp; Lorem ipsum dolor sit amet, clita erroribus cum et. Zril graeci corrumpit an duo. Quo vide oporteat legendos cu. Ei quo fastidii officiis, id usu dico ubique, meis decore albucius ius te.
 <br>
 	&nbsp; Nam nonumy graece pertinacia ne, liber accommodare vix ad. Eam dico omnes corpora ut, ad platonem gloriatur vulputate mei. Te nec ludus elaboraret. Usu eu ancillae interesset. Nam probo tacimates intellegat id, eu eos vulputate consectetuer, ea aliquam dissentias sadipscing vix.
 <br>

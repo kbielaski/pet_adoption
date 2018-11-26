@@ -8,8 +8,21 @@
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
 
 <script language="JavaScript">
+  var config = {
+    apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
+    authDomain: "pet-7ba63.firebaseapp.com",
+    databaseURL: "https://pet-7ba63.firebaseio.com",
+    projectId: "pet-7ba63",
+    storageBucket: "pet-7ba63.appspot.com",
+    messagingSenderId: "862948521361"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.database();
+  var selectedPetRef = db.ref("selectedPet");
 
-  function addCard(petData){
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+  function addCard(index, petData){
 	cardResults = document.getElementById("all-results");
 	
 	var flipCardElem = document.createElement("div");
@@ -31,8 +44,6 @@
 	var petImg = document.createElement("img");
 	petImg.alt = "Avatar";
 	petImg.style = "width:300px;height:300px;";
-	var storage = firebase.storage();
-	var storageRef = storage.ref();
 	var spaceRef = storageRef.child(petData["img"]);
 	var path = spaceRef.fullPath;
 	var gsReference = storage.refFromURL("gs://pet-7ba63.appspot.com");
@@ -53,11 +64,19 @@
 	var linkElem = document.createElement("a");
 	linkElem.href = "pet_profile.html";
 	linkElem.innerHTML = petData["petName"];
+	linkElem.addEventListener('click', function() {
+		selectedPetRef.set({selectedPet: index});	
+	});
 	headingElem.appendChild(linkElem);
 	
+	var paragraphElemBio = document.createElement("p");
+	paragraphElemBio.className = "pet-bio-body";
+	paragraphElemBio.innerHTML = petData["bio"].replace("Name", petData["petName"]);
+	flipCardBackElem.appendChild(paragraphElemBio);
+
 	var paragraphElem = document.createElement("p");
-	paragraphElem.className = "pet-bio-body";
-	var formatKeyword = "";
+	paragraphElem.className = "pet-keywords-body";
+	var formatKeyword = "Keywords: ";
 	petData["keywords"].forEach(function(keyword){
 		formatKeyword += keyword + " " 
 	});
@@ -66,7 +85,7 @@
 
 
   }
-
+/*
   var config = {
     apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
     authDomain: "pet-7ba63.firebaseapp.com",
@@ -77,7 +96,7 @@
   };
   firebase.initializeApp(config);
   var db = firebase.database();
-
+*/
   window.onload = function() {
   var queryRef = db.ref("query");
   var reverseIndexRef = db.ref("reverseIndex");
@@ -95,7 +114,7 @@
 				var childKey = parseInt(childSnapshot.key);
 				var childVal = childSnapshot.val();
 				if(petIndex.includes(childKey)){
-					addCard(childVal);
+					addCard(childKey, childVal);
 				}
 			});
 		});	
@@ -113,8 +132,9 @@
 
    function autocompleteCapital()
         {
-                //var answerElem = document.getElementById("pr2__answer");
-		var traits = ["dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
+                console.log("hello");
+		//var answerElem = document.getElementById("pr2__answer");
+		var traits = ["bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
 		$("#pr2__answer").autocomplete({source: traits, minLength:0});
 
 		$(".ui-helper-hidden-accessible").hide();
@@ -130,7 +150,7 @@
 	<form action="search_results.html">
                 <fieldset>
                         <legend>What are you looking for?</legend>
-                        <div class="inner-form results-page">
+			<div class="inner-form results-page">
                                 <div class="input-field results">
                                         <input type="submit" value="Search" onclick="submitForm()" class="btn btn-success btn-search">
                                         </input>
@@ -156,8 +176,9 @@
                 </ul>
         </div>
 	<body>
-	<div class="flip-card-results" id="all-results">	
-	<!--<div class="flip-card">
+	<div class="flip-card-results" id="all-results">
+<!--	
+	<div class="flip-card">
   		<div class="flip-card-inner">
     			<div class="flip-card-front">
       				<img src="joe_the_bruin.png" alt="Avatar" style="width:300px;height:300px;">
