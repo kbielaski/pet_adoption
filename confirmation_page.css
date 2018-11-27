@@ -1,0 +1,208 @@
+
+.message{
+  height: 400px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/*Nav bar*/
+.left-underline {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+.left-underline:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #ECECEC;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.left-underline:hover:before, .left-underline:focus:before, .left-underline:active:before {
+  right: 0;
+}
+div.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ee6e73;
+  -webkit-box-shadow: 0px 2px 6px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 2px 6px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 2px 6px 0px rgba(50, 50, 50, 0.75);
+  z-index: 9999999;
+}
+div.navbar > ul.navbar-container {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  overflow: hidden;
+}
+div.navbar > ul > li.nav-item {
+  float: right;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+div.navbar > ul > li.active {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+div.navbar > ul > li:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+a.nav-button {
+  font-family: 'Roboto';
+  text-decoration: none;
+  line-height: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: rgba(228, 241, 254, 1);
+  transition: all 0.5s ease;
+}
+a.nav-button:hover {
+  text-decoration: none;
+}
+li.active > a.nav-button {
+  cursor: default;
+}
+.brand-logo {
+  float: left;
+  cursor: default;
+}
+/*SEARCH RESULTS*/
+.progressBar {
+  border: 1px #ee6e72;
+}
+
+.highlighted {
+  background-color: #ee6e72;
+}
+
+/*projects*/
+#rig {
+  max-width:1100px;
+  margin:0 auto; /*center aligned*/
+  padding: 50px 10px 10px 10px;
+  font-size:0; /* Remember to change it back to normal font size if have captions */
+  list-style:none;
+  /* background-color:#ee6e72; */
+}
+#rig li {
+  display: inline-block;
+  *display:inline;/*for IE6 - IE7*/
+  width:25%;
+  border-radius: 100px;
+  vertical-align:middle;
+  box-sizing:border-box;
+  margin:0;
+  padding:10px 10px 10px 10px;
+}
+      
+/* The wrapper for each item */
+.rig-cell {
+  /*margin:12px;
+  box-shadow:0 0 6px rgba(0,0,0,0.3);*/
+  display:block;
+  position: relative;
+  overflow:hidden;
+  width: 250px;
+  height: 250px;
+}
+      
+/* If have the image layer */
+.rig-img {
+  display:block;
+  width: 100%;
+  height: auto;
+  border:none;
+  transform:scale(1);
+  transition:all 1s;
+  object-fit: cover;
+}
+
+#rig li:hover .rig-img {
+  transform:scale(1.05);
+}
+      
+/* If have the overlay layer */
+.rig-overlay {
+  position: absolute;
+  display:block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background: #ee6e72; url(img/link.png) no-repeat center 20%;
+  background-size:50px 50px;
+  opacity:0;
+  filter:alpha(opacity=0);/*For IE6 - IE8*/
+  transition:all 0.6s;
+}
+#rig li:hover .rig-overlay {
+  opacity:0.8;
+}
+
+/* If have captions */
+.rig-text {
+  display:block;
+  padding:0 30px;
+  box-sizing:border-box;
+  position:absolute;
+  left:0;
+  width:100%;
+  text-align:center;
+  text-transform:capitalize;
+  font-size:18px;
+  font-weight:bold;
+  font-family: 'yeezy_tstar-heavy-webfont', sans-serif;
+  font-weight:normal!important;
+  top:40%;
+  color:white;
+  opacity:0;
+  filter:alpha(opacity=0);/*For older IE*/
+  transform:translateY(-20px);
+  transition:all .3s;
+}
+#rig li:hover .rig-text {
+  transform:translateY(0px);
+  opacity:0.9;
+}
+
+@media (max-width: 9000px) {
+  #rig li {
+      width:25%;
+  }
+}
+
+@media (max-width: 700px) {
+  #rig li {
+      width:33.33%;
+  }
+}
+
+@media (max-width: 550px) {
+  #rig li {
+      width:50%;
+  }
+}
