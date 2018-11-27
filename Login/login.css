@@ -10,6 +10,22 @@
     z-index: 9999999;
      
 }
+/*
+keeps the log in button top right
+*/
+a.left-underline.nav-button {
+    position: absolute;
+    top: 5%;
+    right: 1;
+}
+.navbar {
+    height: 60px;
+}
+
+img.pic-scaled {
+    height: 60px;
+    width: 50px;
+}
 ul {
     list-style-type: none;
 }
@@ -121,6 +137,7 @@ CSS FOR NAVBAR
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
+
 .left-underline:hover:before, .left-underline:focus:before, .left-underline:active:before {
   right: 0;
 }
@@ -150,9 +167,10 @@ div.navbar > ul > li.nav-item {
 div.navbar > ul > li.active {
   background-color: rgba(0, 0, 0, 0.18);
 }
+/*
 div.navbar > ul > li:hover {
   background-color: rgba(0, 0, 0, 0.2);
-}
+}*/
 a.nav-button {
   font-family: 'Roboto';
   text-decoration: none;
@@ -162,6 +180,7 @@ a.nav-button {
   color: rgba(228, 241, 254, 1);
   transition: all 0.5s ease;
 }
+
 a.nav-button:hover {
   text-decoration: none;
 }
