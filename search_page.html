@@ -20,7 +20,7 @@
     messagingSenderId: "862948521361"
   };
   firebase.initializeApp(config);
-  var reverseIndex = {"dog": [], "cat" : [], "rabbit" : [], "bird" : [], "bear": [], "adorable" : [], "cute" : [], "spotted" : [], "fuzzy" : [], "hairy" : [], "shaggy" : [], "furry" : [], "hairless" : [], "smooth" : [], "massive" : [], "large" : [], "small" : [], "petite" : [], "lean" : [], "short" : [], "muscular" : [], "long" : [], "chiseled" : [], "strong" : [], "square" : [], "young" : [], "old" : [], "white" : [], "black" : [], "brown" : [], "spotted" : [], "orange" : [], "tan" : [], "friendly" : [], "nice" : [], "family" : [], "trained" : [], "smelly" : [], "obedient" : [], "loyal" : [], "protective" : [], "smart" : [], "ferocious" : [], "quiet" : [], "clean" : [], "lively" : [], "high-spirited" : [], "intelligent" : [], "knowledgeable" : [], "exhuberant" : [], "playful" : [], "sassy" : []};
+  var reverseIndex = {"all": [], "dog": [], "cat" : [], "rabbit" : [], "bird" : [], "bear": [], "adorable" : [], "cute" : [], "spotted" : [], "fuzzy" : [], "hairy" : [], "shaggy" : [], "furry" : [], "hairless" : [], "smooth" : [], "massive" : [], "large" : [], "small" : [], "petite" : [], "lean" : [], "short" : [], "muscular" : [], "long" : [], "chiseled" : [], "strong" : [], "square" : [], "young" : [], "old" : [], "white" : [], "black" : [], "brown" : [], "spotted" : [], "orange" : [], "tan" : [], "friendly" : [], "nice" : [], "family" : [], "trained" : [], "smelly" : [], "obedient" : [], "loyal" : [], "protective" : [], "smart" : [], "ferocious" : [], "quiet" : [], "clean" : [], "lively" : [], "high-spirited" : [], "intelligent" : [], "knowledgeable" : [], "exhuberant" : [], "playful" : [], "sassy" : []};
   var petType = ["dog", "cat", "rabbit", "bird", "bear"];
   var looks = ["adorable", "cute", "spotted"];
   var hair = ["fuzzy", "hairy", "shaggy", "furry"];
@@ -48,9 +48,9 @@
   
   var db = firebase.database();
   
- 
+/* 
   var counter = 0;
-  /*
+  
   // manually load in the ones that we have so far
   petData = {};
   // joe the bruin
@@ -119,10 +119,14 @@
 
   // Sasha
   reverseIndex["dog"].push(counter);
+  newKeywords = ["lively", "smelly", "high-spirited", "exhuberant", "playful", "adorable", "cute", "fuzzy", "furry", "large", "strong", "young", "tan"];
+  newKeywords.forEach(function(word) {
+	reverseIndex[word].push(counter);
+  });
   petData[counter] = {
 	"petName": "Sasha",
 	"petType":"dog",
-	"keywords" : [],
+	"keywords" : newKeywords,
 	"bio" : "Sasha is a young dog. She barks a lot for protection and loves to roll around in the grass. Her favorite things to do are go to the beach, go on long walks, and watch episodes of Friends.",
 	"longBio":"",
 	"img":"small_dog.png"
@@ -293,16 +297,16 @@
    var reverseIndexRef = db.ref("reverseIndex");
    console.log(reverseIndex);
    reverseIndexRef.set(reverseIndex);
-  */
+*/  
 
 
 
    function submitForm(){
-	/*console.log("Hello this is kelly i am trying to see if it gets to this function");
-	var queryRef = db.ref("query");	
+
 	var searchStr = document.getElementById("pr2__answer").value;
-        console.log(searchStr);*/
-	var searchStr = document.getElementById("pr2__answer").value;
+	if(searchStr == ""){
+		searchStr = "all";
+	}
 	var queryRef = db.ref("query");
 	queryRef.set({query: searchStr});
    }
@@ -310,32 +314,19 @@
    function autocompleteCapital()
         {
                 //var answerElem = document.getElementById("pr2__answer");
-		var traits = ["bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
+		var traits = ["all", "bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
 		$("#pr2__answer").autocomplete({source: traits, minLength:0});
 
 		$(".ui-helper-hidden-accessible").hide();
 
 		var answer = document.getElementById("pr2__answer");
-
-		/*if(input.length < 2){
-                        $("#pr2__answer").autocomplete({source: []});
-                }
-                else{
-                        var capitals = [];
-                        var pairs = window.pairs;
-                        for (i=0; i < pairs.length; i++){
-                                var capital = pairs[i]["capital"].toLowerCase();
-                                if(capital.includes(input)){
-                                        capitals.push(pairs[i]["capital"]);
-                                }
-                        }
-                        $("#pr2__answer").autocomplete({source: capitals});
-                }
-                $("#pr2__answer").keydown(function(event) {
-                        if(event.keyCode == 13){
-                                submitCapital();
-                        }
-                });*/
+		if(document.getElementById("pr2__answer") != ""){
+		$("#pr2__answer").keydown(function(event) {
+			if(event.keyCode == 13){
+				submitForm();		
+			}
+		});
+		}
         };
 
 </script>
@@ -358,7 +349,8 @@
 	<body>
 	<div class="navbar">
 		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<!--<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>-->
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
 			<li class="nav-item">
 				<a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
 			</li>
@@ -386,9 +378,6 @@
 			</div>-->
 		</fieldset>					
 	</form>
-	</div>
-	<div>
-	This div is after the image
 	</div>
 	</body>
 </html>
