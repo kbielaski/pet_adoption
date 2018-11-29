@@ -8,16 +8,19 @@
 	
 	<div class="navbar">
 		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
 			<li class="nav-item">
+				<img src="portal_icon.png" align="middle" class ="left-underline nav-button icon-scaled"/> </li>
+				<!--
 				<a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+			-->
 			</li>
 		</ul>
 	</div>
 
-
-	<h1>Adopt Joe Bruin</h1>
-
+	<div class="app_title">
+		<h1 class="title-content">Adopt Joe Bruin</h1>
+	</div>
 	<!-- multistep form -->
 	<form id="msform">
 	  <!-- progressbar -->
@@ -58,7 +61,7 @@
 		</select><br>
 
 	    <input type="button" name="back" class="back action-button" value="Back to Results" />
-	    <input type="button" name="next" class="next action-button" value="Next" />
+	    <input type="button" name="next" class="next action-button first_page" value="Next" />
 	  </fieldset>
 	  <fieldset>
 	    <h2 class="fs-title">Answer Questions</h2>
@@ -68,7 +71,7 @@
 	    <textarea id="questions" rows="7" placeholder="Type in your questions..."></textarea>
 
 	    <input type="button" name="previous" class="previous action-button" value="Previous" />
-	    <input type="button" name="next" class="next action-button" value="Next" />
+	    <input type="button" name="next" class="next action-button second_page" value="Next" />
 	  </fieldset>
 	  <fieldset>
 	    <h2 class="fs-title">Confirmation</h2>

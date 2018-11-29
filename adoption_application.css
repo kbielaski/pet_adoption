@@ -5,11 +5,18 @@ html, body {
 
 }
 
-h1 {
-  font-size: 30px;
-  height: 100px;
+.app_title{
+  height: 150px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+}
+
+
+.title-content{
+  color: #2C3E50;
+  font-size: 30px;
 
 }
 #msform h4 {
@@ -153,6 +160,19 @@ h1 {
 
 
 /*Nav bar*/
+.pic-scaled {
+    height: 60px;
+    width: 60px;
+    float: left;
+    cursor: pointer;
+}
+.icon-scaled {
+    height: 45px;
+    width: 45px;
+    float: right;
+    cursor: pointer;
+    padding: 8px 0;
+}
 .left-underline {
   display: inline-block;
   vertical-align: middle;
@@ -204,7 +224,9 @@ div.navbar > ul.navbar-container {
 }
 div.navbar > ul > li.nav-item {
   float: right;
+  /*
   background-color: rgba(0, 0, 0, 0.1);
+  */
   transition: all 0.5s ease;
 }
 div.navbar > ul > li.active {
