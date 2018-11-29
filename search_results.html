@@ -104,11 +104,18 @@
   queryRef.on("value", function(snapshot) {
 	var queryStr = "";
 	queryStr = snapshot.val()["query"];
-	console.log(queryStr);
+	if(queryStr == "all"){
+	petIdsRef.once("value", function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+                	var childKey = parseInt(childSnapshot.key);
+                        var childVal = childSnapshot.val();
+			addCard(childKey, childVal);                        
+                });
+	});
+	}
+	else{
 	reverseIndexRef.on("value", function(snapshot) {
 		var petIndex = snapshot.val()[queryStr];
-		console.log(queryStr);
-		console.log(petIndex);
 		petIdsRef.once("value", function(snapshot) {
 			snapshot.forEach(function(childSnapshot) {
 				var childKey = parseInt(childSnapshot.key);
@@ -119,25 +126,36 @@
 			});
 		});	
 	});
+	}
 	
   });
 
   };
 
   function submitForm(){
+	if(document.getElementById("pr2__answer").value != ""){
 	var searchStr = document.getElementById("pr2__answer").value;
 	var queryRef = db.ref("query");
 	queryRef.set({query: searchStr});
+	}
    }
 
    function autocompleteCapital()
         {
-                console.log("hello");
 		//var answerElem = document.getElementById("pr2__answer");
-		var traits = ["bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
+		var traits = ["all", "bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
 		$("#pr2__answer").autocomplete({source: traits, minLength:0});
 
 		$(".ui-helper-hidden-accessible").hide();
+
+		var queryText = document.getElementById("pr2__answer").value;
+		if(queryText != ""){
+		$("#pr2__answer").keydown(function(event) {
+                        if(event.keyCode == 13){
+                                submitForm();
+                        }
+                });
+		}
         };
 
 </script>
@@ -169,7 +187,8 @@
 	</head>
 	<div class="navbar">
                 <ul class="navbar-container">
-                        <li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
+                        <!--<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>-->
                         <li class="nav-item">
                                 <a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
                         </li>
