@@ -20,11 +20,13 @@ var config = {
   var storage = firebase.storage();
   var storageRef = storage.ref();
 
+  window.onload = function() {
   selectedPetRef.on("value", function(snapshot) {
 	var selectedPetIndex = snapshot.val()["selectedPet"];
 	petIdsRef.child(selectedPetIndex).on("value", function(snapshot) {
 		console.log(snapshot.val());
 		var selectedPetData = snapshot.val();
+		document.getElementById("pet-profile-name-header").innerHTML = selectedPetData["petName"];
 		var profilePicElem = document.getElementById("profile-pic");
 
         	var spaceRef = storageRef.child(selectedPetData["img"]);
@@ -34,9 +36,10 @@ var config = {
                 	profilePicElem.src = url;
         	});
         	var petBioElem = document.getElementById("pet-bio");
-        	petBioElem.innerHTML = "\t" +selectedPetData["bio"];
+        	petBioElem.innerHTML = "\t" +selectedPetData["bio"].replace("Name", selectedPetData["petName"]);
 	});	
   });
+  }
 
 </script>
 
@@ -53,6 +56,7 @@ var config = {
                         </li>
                 </ul>
         </div>
+	<h1 id="pet-profile-name-header"></h1>
         <div class="bio">
 	<img id="profile-pic" class="results-profile-pic" width=300 height=300 />
 	<p id="pet-bio"> </p>
