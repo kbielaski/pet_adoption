@@ -1,0 +1,383 @@
+<!-- to do 1. center search bar on search results page, center results on search results page get back button for pet profile -->
+<link href="./nav_bar.css" rel="stylesheet" />
+<link href="./search_page_backgfloor.css" rel="stylesheet"/>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
+<script src="jquery/js/jquery-1.9.0.min.js"></script>
+<script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+
+
+  var config = {
+    apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
+    authDomain: "pet-7ba63.firebaseapp.com",
+    databaseURL: "https://pet-7ba63.firebaseio.com",
+    projectId: "pet-7ba63",
+    storageBucket: "pet-7ba63.appspot.com",
+    messagingSenderId: "862948521361"
+  };
+  firebase.initializeApp(config);
+  var reverseIndex = {"all": [], "dog": [], "cat" : [], "rabbit" : [], "bird" : [], "bear": [], "adorable" : [], "cute" : [], "spotted" : [], "fuzzy" : [], "hairy" : [], "shaggy" : [], "furry" : [], "hairless" : [], "smooth" : [], "massive" : [], "large" : [], "small" : [], "petite" : [], "lean" : [], "short" : [], "muscular" : [], "long" : [], "chiseled" : [], "strong" : [], "square" : [], "young" : [], "old" : [], "white" : [], "black" : [], "brown" : [], "spotted" : [], "orange" : [], "tan" : [], "friendly" : [], "nice" : [], "family" : [], "trained" : [], "smelly" : [], "obedient" : [], "loyal" : [], "protective" : [], "smart" : [], "ferocious" : [], "quiet" : [], "clean" : [], "lively" : [], "high-spirited" : [], "intelligent" : [], "knowledgeable" : [], "exhuberant" : [], "playful" : [], "sassy" : []};
+  var petType = ["dog", "cat", "rabbit", "bird", "bear"];
+  var looks = ["adorable", "cute", "spotted"];
+  var hair = ["fuzzy", "hairy", "shaggy", "furry"];
+  var hairless = ["hairless", "smooth"];
+  var bigStature = ["massive", "large"];
+  var smallStature = ["small", "petite", "lean", "short"];
+  var stature = ["muscular", "long", "chiseled", "strong", "square"];
+  var age = ["young", "old"];
+  var color = ["white", "black", "brown", "spotted", "orange", "tan"]; 
+  var personality = ["friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "playful", "sassy"];
+  var dogBios = ["Name's favorite activity is going outside on walks. They also like to be surrounded by the forests and the wilderness so that they can explore new areas.", "Name enjoys sitting and watching tv with you. They especially like playing with any animals on the television or playing with their reflection in mirrors.",
+	"Name enjoys following people around and always wants cuddles.", "Name is an empathetic puppers. They can look into your eyes and know exactly what kind of day you have had.",
+	 "Name's favority activity is playing fetch. He also loves meeting other cats and dogs.", "Name loves chasing around their own tail. They are also a very smart dog who always knows when it is lunch time."];
+  var catBios = ["Name likes to make the humans and animals around them happy. They can sense others feelings and will come close when they know you are sad", 
+	"Name loves getting their tummy scratched. They will nudge your hand to motion that they want a tummy rub.", 
+	"Name plays with any house hold object. They are easily entertained and don't need too much attention."];
+  var rabbitBios = ["Name enjoys the comfort of their cage. When the cage door is opened, they will stay in the cage.", "Name loves being fed regularly and expects food at their normal meal times.", 
+	"Name cleans up after themself and other pets. They won't leave a trail of anything."];
+  var birdBios = ["Name sqwaks at most movement and wakes up when the sun rises.", "Name loves it when you pet their neck. They also repay you by snuggling up to you.", 
+	"Name is a protective, mature bird that likes for everything to be in its place and cares for the others in their flock."];
+	 
+  var names = ["Godiva", "Snowy", "Whiskey", "Lola", "Rhett", "Nobel", "Fergie", "Butchy", "Zeke", "Nakita", "Brook", "Buster", "Amigo", "Precious", "Eifel", "Shady", "Banjo", "Mollie", "Chase", "Montana", "Babbles", "Jelly", "Abigail", "Erin", "Bosco", "Smokey", "Willy", "Prancer", "Crystal", "Dillon", "Guy", "Chili", "Aussie", "Poppy", "Pockets", "Shiloh", "Bandit", "Kallie", "Laddie", "Aires", "Claire", "Commando", "Mitch", "Wolfgang", "Carley", "Zack", "Kato", "Silvester", "Turner", "Rover", "Macy", "Julius", "Samantha", "Itsy-bitsy", "Willow", "Chief", "Sally", "", "Natasha", "Snoopy", "Rolex", "Dylan", "Jolly", "Jolie", "Amy", "Foot", "Gretchen", "Boo-boo", "Alfie", "Itsy", "Amos", "Jackie", "Toni", "Cricket", "Ebony", "Guinness", "Goldie", "Mocha", "Chubbs", "Figaro", "Ginny", "Bo", "Jimmuy", "Maggie-moo", "Skip", "Nick", "Bridgett", "Athena", "Maddie", "Sly", "Dakota", "Topaz", "Cooper", "Panda", "Papa", "Nona", "Ringo", "Kitty", "Scarlett", "Princess", "Jasper", "Lincoln", "Dudley", "Peter", "", "Poncho", "Ziggy", "Charmer", "Scoobie", "Gator", "Lucy", "Jj", "", "Abbie", "Piglet", "Mini", "Chocolate", "Hanna", "Maya", "Rags", "Birdy", "Fluffy", "Brady", "Nellie", "Odie", "Jesse", "Lexie", "Salem", "Silky", "Crackers", "Harvey", "Brittany", "Stella", "Solomon", "Haley", "Kobe", "Mac", "Roman", "Maximus", "Austin", "Teddy-bear", "Chippy", "George", "Troy", "Snickers", "Tiki", "Jamie", "Oz", "Nikita", "Echo", "Slinky", "Wiggles", "Tori", "Chloe", "Ralph", "Milo", "", "Diva", "Homer", "Greenie", "Fred", "Bacchus", "Angus", "Chanel", "Bart", "Indy", "Rosie", "Nibby-nose", "Tippy", "Vito", "Hammer", "Buffie", "Nosey", "Sarge", "Bullet", "Pete", "Vinny", "Merlin", "Rex", "Trooper", "Bones", "Zorro", "Dodger", "Gidget", "Koty", "Schultz", "Sparky", "Baby-doll", "Connor", "Cody", "Nibbles", "Bubbles", "Vegas", "Alf", "Gracie", "Gromit", "Persy", "Babe", "Nina", "Klaus", "Skittles", "Bernie", "Blanche", "Sable", "Nico", "Daisey-mae", "Suzy", "Finnegan", "Missie", "Bradley", "Linus", "Flopsy", "Sailor", "Muffy", "Biggie", "Ming", "Bambi", "Sydney", "Max", "Sparkle", "Jackpot", "Jackson", "Conan", "Bizzy", "Winter", "Cha", "Skinny", "Dinky", "Prissy", "Tito", "Eddy", "Jet", "Buddie", "Jett", "", "Sunshine", "Macintosh", "Frankie", "Pablo", "Shelby", "Boots", "Roscoe", "Meadow", "Domino", "Trouble", "", "Jerry", "Bumper", "Allie", "Black-jack", "Ashley", "Jasmine", "Hailey", "Bj", "Doc", "Koba", "Red", "Petie", "Nana", "Sterling", "Boy", "Callie", "Astro", "Charles", "Sebastian", "Sabine", "Lynx", "Roxanne", "Maverick", "Rocco", "Snowball", "Dee", "Aries", "Chewie", "Porky", "Admiral", "Luke", "Keesha", "Muffin", "Ajax", "Brit", "Coconut", "Chipper", "Doggon’", "Whiskers", "Honey", "Tony", "Spud", "Ripley", "Josie", "Beauty", "Tuffy", "Mitzy", "Chyna", "Alex", "Maggie-mae", "", "Jetta", "Leo", "Ralphie", "Millie", "Pasha", "Scruffy", "Jazz", "Andy", "", "Baby", "Booster", "Gilda", "Hugo", "Faith", "Savannah", "Jelly-bean", "Sage", "Weaver", "Schotzie", "Wrigley", "Wallace", "Barley", "Molly", "Hope", "Jags", "Miasy", "Monster", "", "Rowdy", "Moses", "Wags", "Isabelle", "Clicker", "Brownie", "Doogie", "Braggs", "Grover", "Megan", "Tilly", "Pepe", "Little-guy", "Kasey", "Elliot", "Jojo", "Shelly", "Holly", "Coal", "Morgan", "Kc", "Boy", "Blaze", "Rambo", "Kosmo", "Grady", "Pooh-bear", "Darcy", "Grizzly", "Happyt", "Bucky", "Tigger", "Taylor", "Franky", "Digger", "Mookie", "Bishop", "Bitsy", "Budda", "Porkchop", "Sheba", "Pooky", "Pebbles", "Fifi", "Cameo", "Mugsy", "Tiffany", "Mikey", "Cinnamon", "Chamberlain", "Apollo", "Pogo", "Pumpkin", "Maxwell", "Gasby", "Maxine", "Quincy", "Sunny", "Speedy", "Lazarus", "Scout", "Chad", "Sundance", "Ivory", "Chucky", "Wyatt", "Ally", "Rosa", "Patches", "Rascal", "Ollie", "Thyme", "Shaggy", "Bear", "Marble", "Copper", "Jester", "Arrow", "Patricky", "Nitro", "Sabrina", "Bailey", "Plato", "Ozzie", "Koda", "", "Hallie", "Buster-brown", "Chi", "Riley", "Titus", "Jaguar", "Little-one", "Yukon", "Gizmo", "Beans", "Cole", "Midnight", "Gringo", "Chessie", "Foxy", "Hamlet", "Bugsey", "Beanie", "Lucky", "Mona", "Wally", "Butterscotch", "Shadow", "Tin", "Chaz", "Waldo", "Rebel", "Roland", "Dutchess", "Rocky", "Bingo", "Puddles", "Wizard", "Dash", "Tucker", "Mulligan", "Hunter", "Destini", "Mariah", "Bit", "Butterball", "Darwin", "Jaxson", "Candy", "Kayla", "Honey-bear", "Mckenzie", "Flakey", "Gretta", "Major", "Wrinkles", "Aldo", "Chiquita", "Barclay", "Nibby", "", "Pandora", "Newt", "Kiwi", "Aj", "Bob", "Marley", "Raven", "Joey", "Bebe", "Eva", "Samson", "Jazmie", "Yang", "Diamond", "Teddy", "Sandy", "Clancy", "Walter", "Ruthie", "Bobbie", "", "Captain", "Tank", "Bug", "Logan", "Ryder", "Pooh", "Noodles", "Sammy", "Rosy", "Dots", "Patch", "Zoie", "Titan", "Dante", "Dexter", "Spirit", "Mister", "Lexus", "Prince", "Tess", "Toby", "Jenny", "Scooter", "Kismet", "Chauncey", "Tristan", "Squirt", "Barkley", "Junior", "Bits", "Macho", "Arnie", "Yin", "Munchkin", "Kellie", "Tux", "Jake", "Tyson", "April", "Pedro", "Missy", "Autumn", "Sweet-pea", "Bubba", "Cobweb", "Tangles", "Bridgette", "Tipr", "Woody", "Beetle", "Cubs", "Blue", "", "Greta", "Nugget", "Glory", "Norton", "Piper", "Clifford", "Vinnie", "Whitie", "Brutus", "Pirate", "", "Bully", "Cotton", "Rico", "Codi", "Pinky", "Oakley", "Mary", "Wayne", "Flower", "Tequila", "Jr", "Houdini", "Ruchus", "", "Camille", "Dave", "Goose", "Boone", "Ladybug", "Rambler", "Cubby", "Brodie", "Dunn", "Fido", "Alexus", "Mischief", "Magnolia", "Flake", "Waddles", "Kenya", "Judy", "Rudy", "Jack", "Bogey", "Gunner", "Flint", "Fritz", "Brandi", "Phoenix", "Harley", "Gus", "Sawyer", "Buzzy", "Caesar", "Rollie", "Mickey", "Meggie", "Spunky", "Hershey", "Cindy", "Sarah", "", "Tiggy", "Boozer", "Paco", "Sugar-baby", "Lily", "Kissy", "Tracker", "Nike", "Queenie", "Daffy", "Winnie", "Sunday", "Frodo", "Squeeky", "Freddy", "Puffy", "Mouse", "", "Hercules", "Kali", "Bongo", "Blackie", "Kira", "Sky", "Garfield", "Gucci", "Lulu", "Georgie", "Kiki", "Porche", "", "Emma", "Lizzy", "Elwood", "Grace", "Sneakers", "Lucas", "Katz", "Ginger", "Tripod", "Johnny", "Angel", "Picasso", "Mackenzie", "Audi", "Spotty", "Oliver", "Luci", "Lightning", "Emmy", "", "Thelma", "Chester", "Pugsley", "Karma", "Nena", "Beamer", "Susie", "Joy", "Brown", "Zena", "Giant", "Jagger", "Fuzzy", "Pinto", "Higgins", "Clover", "Mercedes", "Trigger", "Polly", "Reggie", "Edgar", "", "Thumper", "Kramer", "Tango", "Gracie", "Dempsey", "Hooch", "Chrissy", "Hardy", "Butch", "Turbo", "Ellie", "Nickers", "Sam", "Nemo", "Cassis", "Smarty", "Duke", "Elvis", "Pluto", "Jethro", "Chip", "Benson", "Stanley", "Moochie", "Grace", "Hank", "Jade", "Joe", "", "Tara", "Priss", "Duncan", "Layla", "Puck", "Goober", "Heidi", "Rexy", "Blossom", "May", "Luna", "Chaos", "Mitzi", "Tinker-bell", "Toffee", "Dreamer", "Spencer", "Purdy", "Patty", "Clyde", "Blast", "Rocket", "Timber", "Pixie", "Ace", "Zoey", "Mcduff", "Snuggles", "Duffy", "Woofie", "", "Snuffles", "Laney", "Tyler", "Quinn", "Fonzie", "Dolly", "Genie", "Mandi", "Atlas", "Toto", "Nathan", "Skeeter", "Heather", "Tramp", "Smudge", "Yoda", "Joker", "Gilbert", "Petey", "Bentley", "Buddy", "Bootie", "Buffy", "Fiona", "Chevy", "Adam", "Gibson", "Archie", "Ernie", "Sienna", "Obie", "Scrappy", "Nestle", "Taffy", "Booker", "Yeller", "Nickie", "Chewy", "Dottie", "Humphrey", "Pongo", "Chelsea", "Salty", "Kibbles", "Kelsey", "Sugar", "Slick", "Kane", "Chips", "Bud", "Tiger", "Cocoa", "Dusty", "", "Duchess", "Oscar", "Chivas", "Ivy", "Mattie", "Opie", "Hannah", "", "Belle", "Isabella", "Skipper", "Gretel", "Harry", "Boris", "Newton", "Tessie", "Amber", "Hoover", "Calvin", "Stinky", "Sadie", "Freckles", "Tinky", "Rock", "Dutches", "Panther", "Cutie-pie", "Rusty", "Gordon", "Gabriella", "Jessie", "Flash", "Nikki", "Cyrus", "", "Yogi-bear", "Ben", "Rufus", "Mindy", "Kona", "Gunther", "Pretty", "Jewels", "Bunky", "Twinkle", "Vava", "Bb", "Sasha", "Pickles", "Axel", "Billie", "Tally", "Georgia", "Taz", "Cupcake", "Moose", "Cookie", "Star", "Tabetha", "Einstein", "Harrison", "Kurly", "Billy", "Riggs", "Thor", "", "Mojo", "Gigi", "Yogi", "Sherman", "Dee", "Ferris", "Zoe", "Furball", "Misha", "June", "Whispy", "Webster", "Phoebe", "Frisco", "Lefty", "Kirby", "India", "Bruno", "Champ", "Tuck", "Magic", "Skyler", "Tessa", "Wiz", "Snowflake", "Zippy", "Sweetie", "Fancy", "Sophia", "Deacon", "Pudge", "Barney", "Freeway", "Levi", "Biablo", "Louis", "Queen", "Volvo", "Kujo", "Napoleon", "Nicky", "Scooby", "Cheyenne", "Skippy", "Charlie", "", "", "Little-rascal", "Cisco", "Bruiser", "Timmy", "Sox", "Ricky", "Sissy", "Sara", "Hans", "Peanut", "Paddington", "Ozzy", "Thunder", "Cherokee", "Dickens", "Louie", "Phantom", "Taco", "", "Michael", "Tammy", "Bodie", "Wilber", "Hudson", "Katie", "Tootsie", "Cosmo", "Boy", "", "Mimi", "Jewel", "Freedom", "Panther", "Pip-squeek", "Annie", "Simone", "Minnie", "Dozer", "Babykins", "Abbey", "Poochie", "Punkin", "Roxy", "Trixie", "Axle", "Pooch", "Killian", "James", "Kelly", "Brie", "Yellow", "Sweetie-pie", "Ty", "Beau", "Howie", "Rosebud", "Lacey", "Friday", "Miles", "Misty", "T-bone", "Brandy", "Lili", "Freddie", "Dixie", "Amie", "Nala", "Sonny", "Daisy", "Maddy", "Koko", "Bibbles", "Cujo", "Velvet", "Dino", "Monkey", "Boomer", "Baron", "Latte", "Paddy", "Abel", "Kitty", "Wesley", "Bam-bam", "Argus", "Pepper", "Kitty", "Shorty", "Mercle", "Silver", "Spanky", "Lilly", "Ruffe", "Dobie", "Binky", "Wolfie", "Truffles", "Penny", "Tommy-boy", "Fresier", "Gabby", "Bella", "Edsel", "Monty", "King", "", "Wilson", "Tuesday", "Frosty", "Cleo", "Ruffer", "Earl", "Murphy", "Chance", "Stich", "Harpo", "Gavin", "Chico", "Guido", "Sumo", "Jenna", "Mango", "Ruffles", "Sophie", "Huey", "Maggy", "Cassie", "Mandy", "Pokey", "Brando", "Snoop", "", "Casper", "Rocko", "Xena", "Bessie", "Diego", "Doodles", "Cleopatra", "Piggy", "Presley", "Noel", "Aggie", "Cozmo", "Stuart", "Ruger", "Basil", "Boo", "Jordan", "Trinity", "Spike", "Bugsy", "Bobby", "Romeo", "Francais", "Roxie", "Madison", "Sassy", "Iris", "Bozley", "Capone", "Oreo", "Simba", "Peanuts", "Niki", "Zeus", "Bonnie", "Maggie", "Mo", "Winston", "Porter", "Jersey", "Daphne", "Brindle", "Buck", "Nutmeg", "Simon", "Olivia", "Tommy", "", "Curry", "Izzy", "Paris", "Sassie", "Coco", "Ranger", "Armanti", "Curly", "Barker", "Shasta", "Shiner", "Smoke", "Puppy", "Gypsy", "Patsy", "Bo", "Floyd", "Barnaby", "Bucko", "Summer", "Tinker", "Checkers", "Kyra", "Tanner", "Tex", "Lucifer", "Reilly", "Lexi", "Violet", "Sheena", "Ember", "Miko", "Dragster", "Niko", "Starr", "Baxter", "Griffen", "Jess", "Whiz", "Toots", "Willie", "Miller", "Pierre", "China", "Frisky", "Otto", "Jingles", "Kerry", "Otis", "Scooby-doo", "Lassie", "Dandy", "Justice", "Beaux", "Tasha", "Speedo", "Stormy", "Butter", "Emily", "Bosley", "Henry", "Skye", "Tabby", "", "Mia", "Mittens", "Sierra", "Benny", "Tiny", "", "Ashes", "Yaka", "Pearl", "Mason", "Lovey", "Boss", "Susie-q", "Corky", "Twiggy", "Mack", "Jane", "Pretty-girl", "Moonshine", "Peppy", "Bullwinkle", "Westie", "Pookie", "Ruby", "Casey", "Parker", "Remy", "Birdie", "Powder", "Abby", "Onie", "Dharma", "Diesel", "Charisma", "Peaches", "Benji", "Montgomery", "Valinto", "Speed", "Felix", "Darby", "Trapper", "Kipper", "Dewey", "Spookey", "Onyx", "Buttons", "Girl", "T-bird", "Popcorn", "Bobo", "Augie", "Raison", "Cinder", "Eddie", "Buttercup", "Lady", "Nero", "Cali", "Comet", "Blondie", "Loki", "Addie", "Brooke", "Libby", "Sampson", "Spot", "Biscuit", "Kid", "Pepsi", "Travis", "Pippin", "Chic", "Cutie", "Barbie", "Lou", "Hobbes", "Dude", "Pippy", "Moocher", "Tom", "Scottie", "Olive", "Buckeye", "Tobie", "Dallas", "Hugh", "Elmo"]
+
+  console.log(Math.random());
+  
+  var db = firebase.database();
+  
+/* 
+  var counter = 0;
+  
+  // manually load in the ones that we have so far
+  petData = {};
+  // joe the bruin
+  reverseIndex["bear"].push(counter);
+  var newKeywords = ["adorable", "fuzzy", "hairy", "shaggy", "furry", "muscular", "long", "chiseled", "strong", "old", "brown", "tan", "friendly", "family", "trained", "loyal", "protective", "smart", "ferocious", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"];
+  newKeywords.forEach(function(word) { 
+	reverseIndex[word].push(counter);
+  });  
+  petData[counter] = {
+	"petName": "Joe Bruin",
+	"petType": "bear",
+	"keywords" : newKeywords,
+	"bio": "Joe Bruin is a friendly bear. He is a UCLA fanatic. Joe enjoys cheering for the Bruins and roaring at the Trojans. Joe's favorite treat is salmon",
+	"longBio": "", 
+	"img" : "joe_the_bruin.png"
+  }; 
+  counter ++;
+  
+  // Chester the dog
+  reverseIndex["dog"].push(counter);
+  newKeywords = ["adorable", "cute", "fuzzy", "hairy", "shaggy", "furry", "lean", "muscular", "chiseled", "strong", "old", "brown", "tan", "friendly", "nice", "family", "trained", "obedient", "loyal", "protective", "smart", "lively", "high-spirited", "exhuberant", "playful"];
+  newKeywords.forEach(function(word) {
+        reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName": "Chester",
+	"petType": "dog",
+	"keywords": newKeywords,
+	"bio": "Chester is a lovable dog. He was found enjoys rolling in the grass, long strolls through the park, and meeting new dogs. Chester is loyal and loves attention.",
+	"longBio" : "",
+	"img" : "dog_on_grass.png"
+  };
+  counter ++;
+  
+  // Laura
+  reverseIndex["dog"].push(counter);
+  newKeywords = ["smooth", "small", "petite", "lean", "short", "old", "trained", "obedient", "loyal", "protective", "smart", "quiet", "clean", "intelligent", "knowledgeable", "sassy"]; 
+  newKeywords.forEach(function(word) {
+        reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName" : "Laura",
+	"petType": "dog",
+	"keywords": newKeywords,
+	"bio" : "Laura is a sassy dog. Even though she will pretend not to need you, she notices when you are gone and keeps an eye on you to make sure you are okay.",
+	"longBio": "",
+	"img":"disappointed_dog.png"
+  };
+  counter++;
+
+  // Bruce
+  reverseIndex["rabbit"].push(counter);
+  newKeywords = ["lively", "smelly", "high-spirited", "exhuberant", "playful", "adorable", "cute", "fuzzy", "furry", "small", "petite", "muscular", "chiseled", "strong", "young", "tan"];
+  newKeywords.forEach(function(word) {
+        reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName" : "Bruce",
+	"petType": "rabbit",
+	"keywords" : newKeywords,
+	"bio" : "Bruce is an adrenaline junky. He enjoys spinning his wheel as fast as it will go and jumping off of cages. His favorite snack is carrots and hummus.",
+	"longBio": "",
+	"img" : "bunny.png"
+  };
+  counter ++;
+
+  // Sasha
+  reverseIndex["dog"].push(counter);
+  newKeywords = ["lively", "smelly", "high-spirited", "exhuberant", "playful", "adorable", "cute", "fuzzy", "furry", "large", "strong", "young", "tan"];
+  newKeywords.forEach(function(word) {
+	reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName": "Sasha",
+	"petType":"dog",
+	"keywords" : newKeywords,
+	"bio" : "Sasha is a young dog. She barks a lot for protection and loves to roll around in the grass. Her favorite things to do are go to the beach, go on long walks, and watch episodes of Friends.",
+	"longBio":"",
+	"img":"small_dog.png"
+  };
+  counter ++;
+
+  // Thumper
+  reverseIndex["rabbit"].push(counter);
+  newKeywords = ["adorable", "cute", "fuzzy", "furry", "smooth", "small", "petite", "short", "old", "brown", "tan", "trained", "obedient", "loyal", "protective", "smart", "quiet", "clean", "intelligent", "knowledgeable", "sassy"];
+  newKeywords.forEach(function(word) {
+        reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName": "Thumper",
+	"petType" : "rabbit",
+	"keywords" : newKeywords,
+	"bio" : "Thumper is a yoga instructor who loves Whole Foods but hates when the bundles of kale are too thick. She loves vegan carrots and soy lattes.",
+	"longBio" : "",
+	"img" : "bunny.jpg"
+  };
+  counter ++;
+
+  // Sir Meow-a-lot
+  reverseIndex["cat"].push(counter);
+  newKeywords = ["friendly", "fuzzy", "hairy", "furry", "smooth", "large", "lean", "long", "young", "orange", "friendly", "nice", "trained", "obedient", "loyal", "lively", "high-spirited", "intelligent", "exhuberant", "playful"];
+  newKeywords.forEach(function(word) {
+        reverseIndex[word].push(counter);
+  });
+  petData[counter] = {
+	"petName" : "Sir Meow-a-lot",
+	"petType" : "rabbit",
+	"keywords" : newKeywords,
+	"bio" : "Sir Meow-a-lot is a fun-loving cat. He claims any yarn ball to use as a prop for his interpretive dancing",
+	"longBio" : "",
+	"img" : "cat.jpg"
+  };
+  counter ++;
+ 
+  var petIds = db.ref("petIds");
+  
+  var petImgs = {"dog": ["Cocker Spaniel 1.png", "Cocker Spaniel 10.png", "Cocker Spaniel 11.png", "Cocker Spaniel 12.png", "Cocker Spaniel 14.png", "Cocker Spaniel 2.png", "Cocker Spaniel 3.png", "Cocker Spaniel 4.png", "Cocker Spaniel 5.png", "Cocker Spaniel 6.png", "Cocker Spaniel 7.png", "Cocker Spaniel 8.png", "Cocker Spaniel 9.png", "English Retriever 1.png", "English Retriever 2.png", "English Retriever 3.png", "Golden Doodle 1.png", "Golden Doodle 2.png", "Golden Doodle 3.png", "Golden Doodle 4.png", "Golden Doodle 5.png", "Golden Doodle 6.png", "Golden Retriever 1.png", "Golden Retriever 11.png", "Golden Retriever 2.png", "Golden Retriever 3.png", "Golden Retriever 4.png", "Golden Retriever 5.png", "Golden Retriever 7.png", "Golden Retriever 8.png", "Labrador 1.png", "Labrador 2.png", "Labrador 3.png", "Labrador 4.png", "Labrador 5.png", "Labrador 6.png", "Maltese 2.png", "Maltese 3.png", "Maltese 4.png", "Maltese 5.png", "Rottweiler Yorkie Mix 1.png", "Samoyed 2.png", "Samoyed 3.png", "Samoyed 4.png", "Samoyed 5.png", "St Bernard 1.png", "St Bernard 2.png", "St Bernard 3.png", "St Bernard 4.png", "Teddy Bear Retriever 1.png", "Terrier 1.png", "Terrier Mix 1.png", "Yorkie 1.png", "Yorkie 2.png", "Yorkie 3.png", "Yorkie 4.png", "Yorkie 5.png", "Yorkie 6.png", "Yorkie 7.png", "Yorkie 8.png", "Yorkie 9.png", "Yorkshire Terrier Mix 1.png", "Yorkshire Terrier Mix 2.png", "dog 1.png", "maltese 1.png", "samoyed 1.png"], "cat":["Kitten 11.png", "Kitten 12.png", "Kitten 13.png", "Kitten 14.png", "Kitten 15.png", "Kitten 16.png", "Kitten 17.png", "Kitten 18.png", "Kitten 19.png", "Kitten 20.png", "kitten 1.png", "kitten 10.png", "kitten 2.png", "kitten 3.png", "kitten 4.png", "kitten 5.png", "kitten 6.png", "kitten 7.png", "kittten 8.png", "kittten 9.png"], "rabbit":["Bunny 1.png", "Bunny 10.png", "Bunny 11.png", "Bunny 12.png", "Bunny 2.png", "Bunny 3.png", "Bunny 4 .png", "Bunny 5.png", "Bunny 6.png", "Bunny 7.png", "Bunny 8.png", "Bunny 9.png"], "bird":["bird1.png", "bird10.png", "bird11.png", "bird12.png", "bird13.png", "bird14.png", "bird15.png", "bird16.png", "bird17.png", "bird18.png", "bird19.png", "bird2.png", "bird20.png", "bird21.png", "bird22.png", "bird23.png", "bird24.png", "bird3.png", "bird4.png", "bird5.png", "bird6.png", "bird7.png", "bird8.png", "bird9.png"]};
+
+  Object.keys(petImgs).forEach(function(key){
+        imgs = petImgs[key];
+	selectedPetType = key;
+	bios = dogBios;
+	if(key == "dog"){
+		bios = dogBios;}
+	else if(key == "cat"){
+		bios = catBios; }
+	else if(key == "rabbit"){
+		bios = rabbitBios; }
+	else if(key == "bird"){
+		bios = birdBios; }
+	for(j = 0; j < imgs.length; j++){
+		reverseIndex[selectedPetType].push(counter);
+		petImg = imgs[j];
+
+  		// select random looks
+		keywords = [];	
+		var randomCount = Math.floor(Math.random() * 4) + 1;
+		for(i = 0; i < Math.floor(randomCount); i++){
+			var randomAttribute = Math.floor(Math.random() * 3);
+			looksRandomAttribute = looks[randomAttribute];
+			reverseIndex[looksRandomAttribute].push(counter);
+			keywords.push(looksRandomAttribute);
+		}
+	
+		// get amount of hair
+		var randomCount = Math.floor(Math.random() * 2);
+		if(randomCount == 0){
+			//hairless
+			var randomCount = Math.floor(Math.random() * 3);
+			for(i = 0; i < Math.floor(randomCount); i++){
+				var randomAttribute = Math.floor(Math.random() * 2);
+				hairlessRandomAttribute = hairless[randomAttribute];
+				reverseIndex[hairlessRandomAttribute].push(counter);		
+				keywords.push(hairless[randomAttribute]);
+			}
+		}
+		else{
+			var randomCount = Math.floor(Math.random() * 5);
+			for(i = 0; i < Math.floor(randomCount); i++){
+				var randomAttribute = Math.floor(Math.random() * 4) ;
+				hairRandomAttribute = hair[randomAttribute];
+				reverseIndex[hairRandomAttribute].push(counter);
+				keywords.push(hairRandomAttribute);
+			}
+		}
+	
+		//get stature size
+		var randomCount = Math.floor(Math.random() * 2);
+		if(randomCount == 0){
+			//hairless
+			var randomCount = Math.floor(Math.random() * 3);
+			for(i = 0; i < Math.floor(randomCount); i++){
+				var randomAttribute = Math.floor(Math.random() * 2);
+				bigStatureRandomAttribute = bigStature[randomAttribute];
+				reverseIndex[bigStatureRandomAttribute].push(counter);
+				keywords.push(bigStatureRandomAttribute);
+			}
+		}
+		else{
+			var randomCount = Math.floor(Math.random() * 5);
+			for(i = 0; i < Math.floor(randomCount); i++){
+				var randomAttribute = Math.floor(Math.random() * 4);
+				smallStatureRandomAttribute = smallStature[randomAttribute];
+				reverseIndex[smallStatureRandomAttribute].push(counter);
+				keywords.push(smallStatureRandomAttribute);
+			}
+		}
+	
+		//stature type
+		var randomCount = Math.floor(Math.random() * 6);
+		for(i = 0; i < Math.floor(randomCount); i++){
+			var randomAttribute = Math.floor(Math.random() * 5);
+			statureRandomAttribute = stature[randomAttribute];
+			reverseIndex[statureRandomAttribute].push(counter);
+			keywords.push(statureRandomAttribute);
+		}
+	
+		// age
+		var randomCount = Math.floor(Math.random() * 3);
+		for(i = 0; i < Math.floor(randomCount); i++){
+			var randomAttribute = Math.floor(Math.random() * 2);
+			ageRandomAttribute = age[randomAttribute];
+			reverseIndex[ageRandomAttribute].push(counter);
+			keywords.push(ageRandomAttribute);
+		}
+	
+		// color
+		var randomCount = Math.floor(Math.random() * 7);
+		for(i = 0; i < Math.floor(randomCount); i++){
+			var randomAttribute = Math.floor(Math.random() * 6);
+			colorRandomAttribute = color[randomAttribute];
+			reverseIndex[colorRandomAttribute].push(counter);
+			keywords.push(colorRandomAttribute);
+		}
+	
+		var randomCount = Math.floor(Math.random() * 21);
+		for(i = 0; i < Math.floor(randomCount); i++){
+			var randomAttribute = Math.floor(Math.random() * 20);
+			personalityRandomAttribute = personality[randomAttribute];
+			reverseIndex[personalityRandomAttribute].push(counter);
+			keywords.push(personalityRandomAttribute);
+		}		
+    		
+		petData[counter] = {
+			"petName": names[j],
+        		"petType": selectedPetType,
+        		"keywords": [ ...new Set(keywords)],
+        		"bio": bios[counter % bios.length],
+        		"longBio": "",
+        		"img": petImg
+    		};
+		counter++;
+  	}
+  });
+
+   console.log(petData);	
+   //save pet data
+   petIds.set(petData);
+
+   // make elements of reverseIndex unique
+   Object.keys(reverseIndex).forEach(function(key) {
+	reverseIndex[key] = [ ...new Set(reverseIndex[key])];
+   });
+   var reverseIndexRef = db.ref("reverseIndex");
+   console.log(reverseIndex);
+   reverseIndexRef.set(reverseIndex);
+*/  
+
+
+
+   function submitForm(){
+
+	var searchStr = document.getElementById("pr2__answer").value;
+	if(searchStr == ""){
+		searchStr = "all";
+	}
+	var queryRef = db.ref("query");
+	queryRef.set({query: searchStr});
+   }
+
+   function autocompleteCapital()
+        {
+                //var answerElem = document.getElementById("pr2__answer");
+		var traits = ["all", "bear", "dog", "cat", "rabbit", "bird", "adorable", "cute", "spotted", "fuzzy", "hairy", "shaggy", "furry", "hairless", "smooth", "massive", "large", "small", "petite", "lean", "short", "muscular", "long", "chiseled", "strong", "square", "young", "old", "white", "black", "brown", "spotted", "orange", "tan", "friendly", "nice", "family", "trained", "smelly", "obedient", "loyal", "protective", "smart", "ferocious", "quiet", "clean", "lively", "high-spirited", "intelligent", "knowledgeable", "exhuberant", "playful", "sassy"]
+		$("#pr2__answer").autocomplete({source: traits, minLength:0});
+
+		$(".ui-helper-hidden-accessible").hide();
+
+		var answer = document.getElementById("pr2__answer");
+		if(document.getElementById("pr2__answer") != ""){
+		$("#pr2__answer").keydown(function(event) {
+			if(event.keyCode == 13){
+				submitForm();		
+			}
+		});
+		}
+        };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!--<script src="initialize_db.js"></script>-->
+<html>
+	<head>
+	<title>pet adoption</title>
+	</head>
+	<body>
+	<div class="navbar">
+		<ul class="navbar-container">
+			<!--<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>-->
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
+			<li class="nav-item">
+				<a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+			</li>
+		</ul>
+	</div>
+	<div class="bg">
+	<form action="search_results.html" id="form1" method="GET" >
+		<fieldset>
+			<legend>What are you looking for?</legend>
+			<div class="inner-form" >
+				<div class="input-field">
+					<input type="submit" value="Search" onclick="submitForm()" class="btn btn-success btn-search">
+						<!--<i class="fas fa-search btn-search fa-2x"></i>	-->
+						<!--<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path> -->
+					</input>
+					<input id="pr2__answer" type="text" onfocus="autocompleteCapital()">
+					<input type="submit" value="Advanced" class="btn btn-success btn-adv">
+                                	<input type="submit" value="Image Based" class="btn btn-success btn-image">
+				</div>
+			</div>
+			<!--<div class="suggestion-wrap"> 
+				<span>Doesn't Shed</span>
+				<span>Loyal</span>
+				<span>Labradoodle</span>
+			</div>-->
+		</fieldset>					
+	</form>
+	</div>
+	</body>
+</html>
