@@ -2,7 +2,14 @@
 	<head>
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
-	</head>
+    </head>
+    <body>
+    <script>
+        function selectPet(petID) {
+            document.getElementById(petID).style.color = #ee6e72
+            console.log("jo")
+        }
+    </script>
 	<div class="navbar">
 		<ul class="navbar-container">
 			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
@@ -13,58 +20,58 @@
     </div>
     <center>
         <h1>Adopt Joe Bruin</h1>
-        <table class="progressBar">
-            <tr class="progressBar">
-                <td class="highlighted">Basics |</td>
-                <td class="highlighted"> Pet type |</td>
-                <td> fur type |</td>
-                <td> color |</td>
-                <td> size |</td>
-                <td> review</td>
-            </tr>
-        </table>
+        <ul id="progressbar">
+            <li class="active">Basics</li>
+            <li class="active">Pet Type</li>
+            <li>Fur Type</li>
+        </ul>
+        <ul id="progressbar">
+            <li>Color</li>
+            <li>Size</li>
+            <li>Review</li>
+        </ul>
 
         <h2>Results for Pet Type</h2>
 	
 		<ul id="rig">
             <li>
-                <a class="rig-cell" target="_blank" id ="Mozilla">
+                <a class="rig-cell" target="_blank" id ="dog" onclick="selectPet(this.id)">
                     <img class="rig-img" src="dog.jpg">
                         <span class="rig-overlay"></span>
                         <span class="rig-text">Dog</span>
                 </a>
             </li>
             <li>
-                <a class="rig-cell" target="_blank" id = "BruinMeet">
-                    <img class="rig-img" src="cat.jpg">
+                <a class="rig-cell" target="_blank" id = "cat">
+                    <img class="rig-img" src="cat.jpg" onclick=selectPet(this.id)>
                         <span class="rig-overlay"></span>
                         <span class="rig-text">Cat</span>
                 </a>
             </li>
             <li>
-                <a class="rig-cell" target="_blank" id = "UCLA DevX">
-                    <img class="rig-img" src="bunny.jpg">
+                <a class="rig-cell" target="_blank" id = "bunny">
+                    <img class="rig-img" src="bunny.jpg" onclick=selectPet(this.id)>
                         <span class="rig-overlay"></span>
                         <span class="rig-text">Bunny</span>
                 </a>
             </li>
             <li>
-                <a class="rig-cell" target="_blank" id = "moda" >
-                    <img class="rig-img" src="turtle.jpg" >
+                <a class="rig-cell" target="_blank" id = "turtle" >
+                    <img class="rig-img" src="turtle.jpg" onclick=selectPet(this.id)>
                     <span class="rig-overlay" ></span>
                     <span class="rig-text">Turtle</span>
                 </a>
             </li>
             <li>
-                <a class="rig-cell"  target="_blank" id = "touchtest">
-                    <img class="rig-img" src="fish.jpg">
+                <a class="rig-cell"  target="_blank" id = "fish">
+                    <img class="rig-img" src="fish.jpg" onclick=selectPet(this.id)>
                     <span class="rig-overlay"></span>
                     <span class="rig-text">Fish</span>
                 </a>
             </li>
             <li>
-                <a class="rig-cell"  target="_blank" id = "touchtest">
-                    <img class="rig-img" src="guineapig.jpeg">
+                <a class="rig-cell"  target="_blank" id = "guineaPig">
+                    <img class="rig-img" src="guineapig.jpeg" onclick=selectPet(this.id)>
                     <span class="rig-overlay"></span>
                     <span class="rig-text">Guinea Pig</span>
                 </a>
@@ -80,4 +87,5 @@
 <form action="reviewFilteredSearch.html">
     <input type="submit" value="Next"/>
 </form>
+</body>
 </html>

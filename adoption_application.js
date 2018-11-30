@@ -212,3 +212,8 @@ $( document ).ready(function() {
 
 
 });
+
+function selectPet(petID) {
+	document.getElementByID(petID).style.color = blue
+	console.log("jo")
+}
