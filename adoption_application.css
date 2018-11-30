@@ -12,13 +12,18 @@ html, body {
   justify-content: center;
   align-items: flex-end;
 }
-
-
 .title-content{
   color: #2C3E50;
   font-size: 30px;
-
 }
+
+.errorMessage{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 0px;
+  color: #EF4F32;
+}
+
 #msform h4 {
   font-family: montserrat;
   font-size: 14px;
@@ -59,7 +64,21 @@ html, body {
   display: none;
 }
 /*inputs*/
-#msform input, #msform textarea, #msform option {
+#msform input, #msform textarea, #msform option{
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  font-size: 13px;
+  resize: none;
+  line-height: 1.5;
+}
+#msform select{
+  height: 50px;
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -80,7 +99,7 @@ html, body {
   font-weight: bold;
   color: white;
   border: 0 none;
-  border-radius: 1px;
+  border-radius: 34px;
   cursor: pointer;
   padding: 10px 5px;
   margin: 10px 5px;
@@ -120,7 +139,7 @@ html, body {
   color: #2C3E50;
   text-transform: uppercase;
   font-size: 9px;
-  width: 33.33%;
+  width: 25%;
   float: left;
   position: relative;
 }
@@ -158,6 +177,11 @@ html, body {
   color: white;
 }
 
+/*Autocomplete*/
+
+
+
+
 
 /*Nav bar*/
 .pic-scaled {
@@ -172,6 +196,9 @@ html, body {
     float: right;
     cursor: pointer;
     padding: 8px 0;
+}
+.log-btn{
+  float: right;
 }
 .left-underline {
   display: inline-block;
@@ -229,12 +256,14 @@ div.navbar > ul > li.nav-item {
   */
   transition: all 0.5s ease;
 }
+/*
 div.navbar > ul > li.active {
   background-color: rgba(0, 0, 0, 0.18);
 }
 div.navbar > ul > li:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
+*/
 a.nav-button {
   font-family: 'Roboto';
   text-decoration: none;
