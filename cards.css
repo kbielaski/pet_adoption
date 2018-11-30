@@ -1,3 +1,8 @@
+a {
+  margin-top: 10%;
+}
+
+
 .flip-card {
   float: left;
   margin: 50 20 50 20;
@@ -55,6 +60,11 @@ img {
 
 .pet-bio-body {
   font-size: 20;
+  margin: 0% 10% 10% 10%;
+}
+
+.pet-keywords-body {
+  font-size: 15;
   margin: 10% 10% 10% 10%;
 }
 

@@ -9,16 +9,22 @@ td {
   position: relative;
   background-color: white;
 }
+h1 {
+  margin-top: 7%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 
-
+}
 .bio {
-  top: 10%;
+  margin-top: 0%;
   font-size: 20px;
 }
 
 .bg {
     /* The image used */
-    background-image: url("cat_and_dog.png");
+    background-image: url("bkgd.png");
+    /*background: white;*/
 
     /* Full height */
     height: 100%; 
@@ -27,6 +33,11 @@ td {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+img.pic-scaled {
+    height: 60px;
+    width: 50px;
+    float: left;
 }
 table {
   position: relative;
@@ -41,6 +52,7 @@ fieldset {
 }
 .results-profile-pic {
   float: right;
+  margin: 10 10 10 10;
 }
 /**
  * 1. Correct the text wrapping in Edge and IE.
@@ -83,6 +95,9 @@ legend {
   -webkit-padding-end: 0;
 }
 
+form {
+  margin-bottom: 0;
+}
 
 form legend {
   font-size: 36px;
@@ -93,7 +108,7 @@ form legend {
 }
 form .inner-form {
   width: 40%;
-  top:50%;
+  top:25%;
   left: 30%;
   position:absolute;
   -ms-transform: translateY(-50%);
@@ -107,8 +122,12 @@ form .inner-form.pet-profile-adopt {
 form .inner-form.results-page {
   top:130;
   min-height: 100;
-  left: auto;
+  margin-left: auto;
 }
+ui {
+  color: red;
+}
+
 form .inner-form.results-page.back {
   bottom: 0;
 }
@@ -116,15 +135,25 @@ form .inner-form.results-page.back {
 form .inner-form .input-field {
   height: 70px;
   width: 100%;
+  position: absolute;
+}
+
+.ui-menu .ui-menu-item a{
+  left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   position: relative;
+  display: block;
+  text-align: left;
 }
 
 form .inner-form .input-field.results {
   
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 34px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  position: auto;
 }
 
 form .inner-form .input-field input {
@@ -135,17 +164,17 @@ form .inner-form .input-field input {
   background: #fff;
   display: block;
   width: 100%;
-  padding: 10px 32px 10px 70px;
+  padding: 10px 32px 10px 15px;
   font-size: 18px;
   color: #666;
   border-radius: 34px;
+  box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.4);
 }
 form .inner-form .input-field input.placeholder {
   color: #ccc;
   font-size: 18px;
 }
 form .inner-form .input-field input:hover, .s006 form .inner-form .input-field input:focus {
-  box-shadow: none;
   outline: 0;
 }
 .search-button{
@@ -163,7 +192,7 @@ form .inner-form .input-field .btn-search {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 0;
+  right: -105;
   height: 100%;
   border: 0;
   padding: 0;
@@ -172,9 +201,12 @@ form .inner-form .input-field .btn-search {
   -ms-flex-pack: center;
       justify-content: center;
   align-items: center;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 
 .btn-pet-profile {
+  position: relative;
+  float: right;
   height: 70px;
   background: #fff;
   font-size: 18px;
@@ -184,10 +216,27 @@ form .inner-form .input-field .btn-search {
   color: white;
   background-color: #ee6e73;
   border: 0;
-  padding: 0;
   cursor: pointer;
   width: 200;
-  margin-left: 35%;
+  margin-bottom: 10%;
+}
+
+.btn-pet-profile-ret {
+  position: relative;
+  float: right;
+  height: 70px;
+  background: #fff;
+  font-size: 18px;
+  border-radius: 34px;
+  box-shadow: none;
+  outline: 0;
+  color: white;
+  background-color: #ee6e73;
+  border: 0;
+  cursor: pointer;
+  width: 250;
+  margin-right: 10;
+  margin-bottom: 10%;
 }
 
 form .inner-form .input-field .btn-image {
@@ -199,7 +248,7 @@ form .inner-form .input-field .btn-image {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 0;
+  right: -105;
   height: 100%;
   border: 0;
   padding: 20;
@@ -220,7 +269,7 @@ form .inner-form .input-field .btn-adv {
   -ms-flex-align: center;
       align-items: center;
   position: absolute;
-  right: 175;
+  right: 70;
   top: 75;
   height: 100%;
   border: 0;
