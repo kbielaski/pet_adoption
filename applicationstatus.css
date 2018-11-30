@@ -19,6 +19,23 @@ ul {
     font-size:25;
 }
 
+.container {
+    text-align: center;
+    font-size:25px;
+}
+
+img.pic-scaled {
+    height: 60px;
+    width: 50px;
+    margin: inherit; /* Helped me keep top left corner for icon*/
+}
+a.left-underline.nav-button {
+    position: absolute;
+    top: 5%;
+    right: 20;
+    background-color: rgba(0, 0, 0, 0.1);
+  
+}
 
 div#title {
     text-align: center;
@@ -38,6 +55,57 @@ CARD
     height:300px;
     margin-top:50px;
 }
+
+/*
+ Right side of page 
+*/
+.right {
+    /* width: 250px; */
+    /* height: 150px; */
+    float: right;
+}
+#decline {
+    position: absolute;
+    top: 75%;
+    right: 10%;
+    height: 150px;
+    width: 150px;
+}
+#progress {
+    position: absolute;
+    top: 255;
+    right: 8%;
+    height: 190px;
+    width: 190px;
+}
+/*
+*/
+.left {
+    /* width: 5000px; */
+    /* height: 150px; */
+    float: left;
+}
+
+.secondright {
+    float: right;
+}
+/*
+ first text description
+*/
+#first {
+    position: absolute;
+    right: 35%;
+    top: 25%;
+    width:500px;
+}
+#second{
+    
+    position: absolute;
+    left:30%;
+    top: 65%;
+    width: 500px;
+}
+
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
