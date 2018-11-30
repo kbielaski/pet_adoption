@@ -13,16 +13,16 @@
     </div>
     <center>
         <h1>Adopt Joe Bruin</h1>
-        <table class="progressBar">
-            <tr class="progressBar">
-                <td class="highlighted">Basics |</td>
-                <td class="highlighted"> Pet type |</td>
-                <td class="highlighted"> fur type |</td>
-                <td class="highlighted"> color |</td>
-                <td class="highlighted"> size |</td>
-                <td class="highlighted"> review</td>
-            </tr>
-        </table>
+        <ul id="progressbar">
+            <li class="active">Basics</li>
+            <li class="active">Pet Type</li>
+            <li class="active">Fur Type</li>
+        </ul>
+        <ul id="progressbar">
+            <li class="active">Color</li>
+            <li class="active">Size</li>
+            <li class="active">Review</li>
+        </ul>
 
         <h2>Review</h2>
         <h3>Yours answers:</h3>
@@ -32,21 +32,21 @@
         <ul id="rig">
             <li>
                     <a class="rig-cell" target="_blank" id = "UCLA DevX">
-                        <img class="rig-img" src="bunny.jpg">
+                        <img class="rig-img" src="bunny.jpg" onclick=selectPet()>
                             <span class="rig-overlay"></span>
                             <span class="rig-text">Bunny</span>
                     </a>
                 </li>
             <li>
                     <a class="rig-cell" target="_blank" id = "BruinMeet">
-                        <img class="rig-img" src="cat.jpg">
+                        <img class="rig-img" src="cat.jpg" onclick=selectPet()>
                             <span class="rig-overlay"></span>
                             <span class="rig-text">Cat</span>
                     </a>
                 </li>
             <li>
                     <a class="rig-cell"  target="_blank" id = "touchtest">
-                        <img class="rig-img" src="guineapig.jpeg">
+                        <img class="rig-img" src="guineapig.jpeg" onclick=selectPet()>
                         <span class="rig-overlay"></span>
                         <span class="rig-text">Guinea Pig</span>
                     </a>
