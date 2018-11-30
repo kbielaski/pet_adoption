@@ -2,27 +2,31 @@
 <head>
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
+
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	
 	<div class="navbar">
 		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
 			<li class="nav-item">
-				<a href="Login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+				<a href="Login/login.html" class="left-underline nav-button log-btn" data-scroll>Log out</a>
+				<img src="portal_icon.png" class ="left-underline nav-button icon-scaled"/> </li>				
+				
 			</li>
 		</ul>
 	</div>
 
-
-	<h1>Adopt Joe Bruin</h1>
-
+	<div class="app_title">
+		<h1 class="title-content">Adopt Joe Bruin</h1>
+	</div>
 	<!-- multistep form -->
 	<form id="msform">
 	  <!-- progressbar -->
 	  <ul id="progressbar">
 	    <li class="active">Information</li>
+	    <li>Schedule</li>
 	    <li>Question</li>
 	    <li>Confirmation</li>
 	  </ul>
@@ -30,21 +34,33 @@
 	  <fieldset>
 	    <h2 class="fs-title">Fill in Your Information</h2>
 	    <input type="text" id="firstName" placeholder="First Name" />
+	    <p class="errorMessage" id="firstNameErr"></p>
 	    <input type="text" id="lastName" placeholder="Last Name" />
+	    <p class="errorMessage" id="lastNameErr"></p>
 	    <input type="text" id="email" placeholder="Email" />
+	    <p class="errorMessage" id="emailErr"></p>
 	    <input type="text" id="phone" placeholder="Phone Number" />
-	    <input type="text" id="address" placeholder="Street" />
+	    <p class="errorMessage" id="phoneNumberErr"></p>
+	    <input type="text" id="address" placeholder="Address" />
+	    <p class="errorMessage" id="addressErr"></p>
 	    <input type="text" id="city" placeholder="City" />
-	    <input type="text" id="state" placeholder="State" />
+	    <p class="errorMessage" id="cityErr"></p>
+	    <input type="text" class="autocomplete" id="state" placeholder="State" />
+	    <p class="errorMessage" id="stateErr"></p>
 	    <input type="text" id="zipcode" placeholder="Zipcode" />
-	    <h2 class="fs-title">Desire Form of Interview</h2>
+	    <p class="errorMessage" id="zipcodeErr"></p>
+	    <br>
+	    <input type="button" name="back" class="back action-button" value="Back to Profile" />
+	    <input type="button" name="next" class="next action-button first_page" value="Next" />
+	  </fieldset>
+	  <fieldset>
+	  	<h2 class="fs-title">Desire Form of Interview</h2>
 	    <select id="interviewForm">
 	    	<option disabled selected value> -- select one -- </option>
 		  	<option value="inPerson">In Person</option>
 		  	<option value="phoneCall">Phone Call</option>
 		  	<option value="videoCall">Video Call</option>
 		</select>
-	    <br>
 	    <h2 class="fs-title">Availabele Time for Interview</h2>
 	    <input type="date" id="interviewDate"/>
 	    <select id="interviewTime">
@@ -57,18 +73,19 @@
   			<option value="16-17">4:00 pm-5:00 pm</option>
 		</select><br>
 
-	    <input type="button" name="back" class="back action-button" value="Back to Results" />
-	    <input type="button" name="next" class="next action-button" value="Next" />
+	    <input type="button" name="previous" class="previous action-button" value="Previous" />
+	    <input type="button" name="next" class="next action-button second_page" value="Next" />
 	  </fieldset>
 	  <fieldset>
 	    <h2 class="fs-title">Answer Questions</h2>
 	    <h3 class="fs-subtitle">Why you want to adopt Joe Bruin?</h3>
+	    <p class="errorMessage" id="reasonsErr"></p>
 	    <textarea id="reasons" rows="7" placeholder="Type in your reasons..."></textarea>
 	    <h3 class="fs-subtitle">Do you have any questions about Joe Bruin?(ex vaccine record)</h3>
 	    <textarea id="questions" rows="7" placeholder="Type in your questions..."></textarea>
 
 	    <input type="button" name="previous" class="previous action-button" value="Previous" />
-	    <input type="button" name="next" class="next action-button" value="Next" />
+	    <input type="button" name="next" class="next action-button third_page" value="Next" />
 	  </fieldset>
 	  <fieldset>
 	    <h2 class="fs-title">Confirmation</h2>

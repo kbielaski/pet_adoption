@@ -3,19 +3,23 @@
 <head>
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./confirmation_page.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<div class="navbar">
 		<ul class="navbar-container">
-			<li><a href="#" class="left-underline nav-button brand-logo">Pet Adoption Logo</a></li>
+			<li><img src="logo_white.png" class ="left-underline nav-button pic-scaled"/> </li>
 			<li class="nav-item">
-				<a href="login/login.html" class="left-underline nav-button" data-scroll>Login</a>
+				<a href="Login/login.html" class="left-underline nav-button log-btn" data-scroll>Log out</a>
+				<img src="portal_icon.png" class ="left-underline nav-button icon-scaled"/> </li>
 			</li>
 		</ul>
 	</div>
 
-	<div class="message" ><h1>Your application submitted successfully!</h1></div>
-
-
+	<div class="message" >
+		<h1>Your application submitted successfully!</h1>
+		<form><input align="center" type="button" name="status" class="status" value="See Application Status"/></form>
+	</div>
+	<script src="./confirmation_page.js"></script>
 </body>
 </html>
