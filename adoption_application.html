@@ -3,7 +3,13 @@
 	<title>pet adoption</title>
 	<link rel="stylesheet" type="text/css" href="./adoption_application.css">
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="jquery/js/jquery-1.9.0.min.js"></script>
+	<script src="./adoption_application.js"></script>
+	<!--
+	<link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
+	-->
+	<link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.new.css" rel="stylesheet" />
+	<script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
 </head>
 <body>
 	
@@ -60,22 +66,25 @@
 	  <fieldset>
 	  	<h2 class="fs-title">Desire Form of Interview</h2>
 	    <select id="interviewForm">
-	    	<option disabled selected value> -- select one -- </option>
+	    	<option disabled selected> -- select one -- </option>
 		  	<option value="inPerson">In Person</option>
 		  	<option value="phoneCall">Phone Call</option>
 		  	<option value="videoCall">Video Call</option>
 		</select>
+		<p class="errorMessage" id="interviewFormErr"></p>
 	    <h2 class="fs-title">Availabele Time for Interview</h2>
-	    <input type="date" id="interviewDate"/>
+	    <input type="text" id="interviewDate" placeholder="MM/DD/YYYY" />
+	    <p class="errorMessage" id="interviewDateErr"></p>
 	    <select id="interviewTime">
-			<option disabled selected value> -- select a time slot-- </option>
+			<option disabled selected> -- select a time slot-- </option>
   			<option value="9-10">9:00 am-10:00 am</option>
   			<option value="10-11">10:00 am-11:00 am</option>
   			<option value="11-12">11:00 am-12:00 pm</option>
   			<option value="14-15">2:00 pm-3:00 pm</option>
   			<option value="15-16">3:00 pm-4:00 pm</option>
   			<option value="16-17">4:00 pm-5:00 pm</option>
-		</select><br>
+		</select>
+		<p class="errorMessage" id="interviewTimeErr"></p>
 
 	    <input type="button" name="previous" class="previous action-button" value="Previous" />
 	    <input type="button" name="next" class="next action-button second_page" value="Next" />
@@ -83,8 +92,8 @@
 	  <fieldset>
 	    <h2 class="fs-title">Answer Questions</h2>
 	    <h3 class="fs-subtitle">Why you want to adopt Joe Bruin?</h3>
-	    <p class="errorMessage" id="reasonsErr"></p>
 	    <textarea id="reasons" rows="7" placeholder="Type in your reasons..."></textarea>
+	    <p class="errorMessage" id="reasonsErr"></p>
 	    <h3 class="fs-subtitle">Do you have any questions about Joe Bruin?(ex vaccine record)</h3>
 	    <textarea id="questions" rows="7" placeholder="Type in your questions..."></textarea>
 
@@ -102,11 +111,11 @@
 	    <p id="Phone"></p><br>
 	    <h4>Address: </h4><br>
 	    <p id="Address"></p><br>
-	    <h4>Interview: </h4><br>
+	    <h4>Interview: </h4>
 	    <p id="Interview"></p><br>
-	    <h4>Why you want to adopt Joe Bruin?</h4><br>
+	    <h4>Why you want to adopt Joe Bruin?</h4>
 	    <p id="Reasons"></p><br>
-	    <h4>Do you have any questions about Joe Bruin?</h4><br>
+	    <h4>Do you have any questions about Joe Bruin?</h4>
 	    <p id="Questions"></p><br>
 
 
@@ -115,8 +124,11 @@
 	  </fieldset>
 	</form>
 
-	<script src="jquery/js/jquery-1.9.0.min.js"></script>
-    <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
-	<script src="./adoption_application.js"></script>
+	
+	<script>
+		$( function() {
+			$( "#interviewDate" ).datepicker({ minDate: 0, maxDate: "+1M" });
+		} );
+	</script>
 </body>
 </html>
