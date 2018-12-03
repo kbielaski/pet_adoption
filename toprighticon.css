@@ -1,0 +1,13 @@
+img.left-underline.nav-button.icon-scaled {
+    height: 45px;
+    width: 45px;
+    float: right;
+    cursor: pointer;
+    padding: 8px 0;
+    position: fixed;
+    right: 100;
+}
+a.nav-button{
+	position: fixed;
+    right: 10;
+}
