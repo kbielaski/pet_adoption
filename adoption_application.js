@@ -7,6 +7,7 @@ $( document ).ready(function() {
 	var firstName, lastName, email, phone, address, city, state, zipcode;
 	var interviewForm, interviewDate, interviewTime;
 	var reasons, questions;
+	var fullName, wholeAddress;
 
 	// Initialize Firebase
     var config = {
@@ -372,10 +373,12 @@ $( document ).ready(function() {
 
 
 		if (isValid==true){
-			$('#Name').html(firstName+" "+lastName);
+			fullName = firstName+" "+lastName;
+			wholeAddress = address+", "+city+", "+state+" "+zipcode;
+			$('#Name').html(fullName);
 			$('#Email').html(email);
 			$('#Phone').html(phone);
-			$('#Address').html(address+", "+city+", "+state+", "+zipcode);
+			$('#Address').html(wholeAddress);
 
 			if(animating) return false;
 			animating = true;
