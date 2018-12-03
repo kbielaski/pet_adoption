@@ -8,6 +8,32 @@ $( document ).ready(function() {
 	var interviewForm, interviewDate, interviewTime;
 	var reasons, questions;
 
+	// Initialize Firebase
+    var config = {
+      	apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
+	    authDomain: "pet-7ba63.firebaseapp.com",
+	    databaseURL: "https://pet-7ba63.firebaseio.com",
+	    projectId: "pet-7ba63",
+	    storageBucket: "pet-7ba63.appspot.com",
+	    messagingSenderId: "862948521361"
+    };
+    firebase.initializeApp(config);
+    // Get a reference to the database service(Realtime Database)
+    var db = firebase.database();
+	var selectedPetRef = db.ref("selectedPet");
+	var petIdsRef = db.ref("petIds");
+
+    //load data from firebase
+    selectedPetRef.on("value", function(snapshot) {
+		var selectedPetIndex = snapshot.val()["selectedPet"];
+		petIdsRef.child(selectedPetIndex).on("value", function(snapshot) {
+			var selectedPetData = snapshot.val();
+			$("#petName").html("Adopt " + selectedPetData["petName"]);
+			$("#question1").html("Why you want to adopt " + selectedPetData["petName"]+"?");
+			$("#question2").html("Do you have any questions about " + selectedPetData["petName"]+"? (ex vaccine record)");
+		});	
+  	});
+
 	// Make sure when pressing enter key while filling the form, it won't automatically press submit button
 	$(document).keypress(function(event){
 	    var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -23,7 +49,6 @@ $( document ).ready(function() {
 		window.location.href='./index.html';
 	});
 
-	 //the interface of UI is weird
 	//autocomplete
     $( function() {
       
@@ -41,6 +66,10 @@ $( document ).ready(function() {
 
 	});
 
+    //datepicker
+    $( function() {
+		$( "#interviewDate" ).datepicker({ minDate: 0, maxDate: "+1M" });
+	} );
 
 	/****************Reference****************
 	* Phone Number - Auto Format
