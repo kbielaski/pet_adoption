@@ -13,6 +13,19 @@ w.navbar {
 ul {
     list-style-type: none;
 }
+/*
+profile logo
+*/
+img.left-underline.nav-button.icon-scaled {
+    height: 45px;
+    width: 45px;
+    float: right;
+    cursor: pointer;
+    padding: 8px 0;
+    position: absolute;
+    left: 75%;
+    top: 0;
+}
 #Status{
     margin-left:5%;
     font-family: Times New Roman;
@@ -31,9 +44,37 @@ img.pic-scaled {
 a.left-underline.nav-button {
     position: absolute;
     top: 5%;
-    right: 20;
-    background-color: rgba(0, 0, 0, 0.1);
+    right: 0%;
+ 
   
+}
+/*
+back button div
+*/
+div#redirect {
+   
+    top: 110%;
+    right: 45%;
+    position: absolute;
+  
+
+}
+/*
+back button
+*/
+input.btn.btn-success.btn-pet-profile-ret {
+    /* background-color: pink; */
+    background-color: #ee6e73;
+    color: white;
+    height: 70px;
+    box-shadow: none;
+    outline: 0;
+    cursor: pointer;
+    width: 250;
+    margin-right: 10px;
+    margin-bottom: 10%;
+    border-radius: 34px;
+    font-size: 18px;
 }
 
 div#title {
