@@ -35,6 +35,9 @@ ul {
 }
 .innercontainer {
     display:inline-block;
+    position: fixed;
+    top: 250px;
+    right: 450px;
 
 }
 
