@@ -1,0 +1,69 @@
+<link href="./login.css" rel="stylesheet"/>
+<htmL>
+	<head>
+	<title> Log In </title>
+	</head>
+<!--Firebase-->	
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCZ4DH8ED8FiiPr-6j6zPf9x0-zqnKm0Q8",
+    authDomain: "myproject-8f1e5.firebaseapp.com",
+    databaseURL: "https://myproject-8f1e5.firebaseio.com",
+    projectId: "myproject-8f1e5",
+    storageBucket: "myproject-8f1e5.appspot.com",
+    messagingSenderId: "299003698586"
+  };
+  var server = firebase.initializeApp(config);
+  var database = server.database();// get ref to database
+  var ref = database.ref();
+
+ /*
+  function submitClick(){
+  	console.log("hi");
+  	var value ={
+  		username: "HI",
+  		password:"document.getElementById('pass').value';
+  		//console.log(document.getElementById('username').value);
+  	  };
+  	  //ref.push(value);
+  	  window.alert('working');
+
+  /*$(".Button").on("click", function(){
+  	submitClick();
+  	console.log('hi');
+  	//href= "../applicationstatus.html"
+  }
+*/
+ var userinput = document.getElementById('user');
+ console.log(userinput);
+</script>
+	<body>
+		<div class="navbar">
+			<ul class="navbar-container">
+				<li><img src="../logo_white.png" class ="pic-scaled"/> </li>
+				<!-- <li class="nav-item">
+				-<a href="login/login.html" class="left-underline nav-button" data-scroll>Login</a> 
+				</li>-->
+			</ul>
+		</div>
+		<div class="outercontainer">
+			<div id="Welcome"> Welcome To Pet Adoption  </div>
+			<div id="pic"> <img  src="shiba.jpg"> </div> 
+		<div class ="innercontainer">
+			<div id="Note">Login to Your Account</div>
+			<form action="">
+            	Username: <input type="text" name="user"><br>
+            	Password: <input type="password" name="password">
+			</form>
+
+
+			<div> <a href="forgotpassword.html"> Forgot Password?</a> </div> 
+			<div> <a class ="Button" href='../applicationstatus.html'> Sign In </a> </div>
+				<!--Should make the href conditional if info is right then go to one page, otherwise dont-->
+		</div>	
+		</div>
+	</body>
+
+</htmL>
