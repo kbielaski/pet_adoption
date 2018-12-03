@@ -21,7 +21,6 @@ html, body {
   margin-top: 0px;
   margin-bottom: 0px;
   font-size: 0px;
-  color: #EF4F32;
 }
 
 /****************Reference****************
@@ -29,11 +28,11 @@ html, body {
 * Atakan Goktepe
 * https://codepen.io/atakan/pen/gqbIz?editors=1000
 ******************************************/
-#msform h4 {
+#msform h4{
   font-family: montserrat;
   font-size: 14px;
   justify-content: left;
-
+  margin-bottom: 0px;
 }
 
 #msform p {
@@ -181,11 +180,6 @@ html, body {
   color: white;
 }
 /****************Reference End****************/
-
-/*Autocomplete*/
-
-
-
 
 
 /*Nav bar*/

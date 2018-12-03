@@ -23,7 +23,7 @@ $( document ).ready(function() {
 		window.location.href='./index.html';
 	});
 
-	/* //the interface of UI is weird
+	 //the interface of UI is weird
 	//autocomplete
     $( function() {
       
@@ -40,7 +40,7 @@ $( document ).ready(function() {
     	$(".ui-helper-hidden-accessible").hide();
 
 	});
-*/
+
 
 	/****************Reference****************
 	* Phone Number - Auto Format
@@ -153,6 +153,7 @@ $( document ).ready(function() {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#emailErr").html( "Email should not be empty" );
 			    $("#emailErr").css("margin-bottom", "10px");
+			    $("#emailErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else if(!emailReg.test(input)){
@@ -160,6 +161,7 @@ $( document ).ready(function() {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#emailErr").html( "Email is invalid" );
 			    $("#emailErr").css("margin-bottom", "10px");
+			    $("#emailErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else {
@@ -180,6 +182,7 @@ $( document ).ready(function() {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#phoneNumberErr").html( "Phone number should not be empty" );
 			    $("#phoneNumberErr").css("margin-bottom", "10px");
+			    $("#phoneNumberErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else if(input.length!=12){
@@ -187,6 +190,7 @@ $( document ).ready(function() {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#phoneNumberErr").html( "Phone number is invalid" );
 			    $("#phoneNumberErr").css("margin-bottom", "10px");
+			    $("#phoneNumberErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else{
@@ -204,12 +208,14 @@ $( document ).ready(function() {
 			$("#zipcode").change(function () {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#zipcodeErr").html( "Zipcode should not be empty" );
+			    $("#zipcodeErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else if(input.length!=5){
 			$("#zipcode").change(function () {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#zipcodeErr").html( "Zipcode should be a 5-digit number" );
+			    $("#zipcodeErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else{
@@ -221,6 +227,7 @@ $( document ).ready(function() {
 					$("#zipcode").change(function () {
 					    $(this).css("border", "1px solid #EF4F32");
 					    $("#zipcodeErr").html( "Zipcode should be a 5-digit number" );
+					    $("#zipcodeErr").css("color", "#EF4F32");
 					}).trigger("change");
 					return false;
 				}
@@ -248,6 +255,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#firstNameErr").html( "First name should not be empty" );
 				    $("#firstNameErr").css("margin-bottom", "10px");
+				    $("#firstNameErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -263,6 +271,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#lastNameErr").html( "Last name should not be empty" );
 				    $("#lastNameErr").css("margin-bottom", "10px");
+				    $("#lastNameErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -285,6 +294,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#addressErr").html( "Address should not be empty" );
 				    $("#addressErr").css("margin-bottom", "10px");
+				    $("#addressErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -301,6 +311,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#cityErr").html( "City should not be empty" );
 				    $("#cityErr").css("margin-bottom", "10px");
+				    $("#cityErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -311,7 +322,21 @@ $( document ).ready(function() {
 			}).trigger("change");
 		}
 		state = $('#state').val();
-		if(state=="") isValid = false;
+		if(state==""){
+			$("#state").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#stateErr").html( "State should not be empty" );
+				    $("#stateErr").css("margin-bottom", "10px");
+				    $("#stateErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#state").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#stateErr").html( "" );
+				    $("#stateErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
 
 		zipcode = $('#zipcode').val();
 		if(checkZipcode(zipcode)==false) isValid = false;
@@ -359,18 +384,68 @@ $( document ).ready(function() {
 			});
 		}
 	});
+	
+	//Figure this out
+	$( function() {
+    	$( "#interviewForm" ).selectmenu();
+		$( "#interviewTime" ).selectmenu();
+  	});
 
 	//click on interview page next btn
 	$(".second_page").click(function(){
 
 		var isValid = true;
-		interviewForm = $( "#interviewForm option:selected" ).text();
-		if(interviewForm==" -- select one -- ") isValid = false;
-		interviewDate = $('#interviewDate').val();
-		if(interviewDate=="") isValid = false;
-		interviewTime = $( "#interviewTime option:selected" ).text();
-		if(interviewTime==" -- select a time slot-- ") isValid = false;
 
+		interviewForm = $( "#interviewForm option:selected" ).text();
+		if(interviewForm==" -- select one -- "){
+			$("#interviewForm").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewFormErr").html( "You have to selet an interview form" );
+				    $("#interviewFormErr").css("margin-bottom", "10px");
+				    $("#interviewFormErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewForm").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewFormErr").html( "" );
+				    $("#interviewFormErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
+		interviewDate = $('#interviewDate').val();
+		if(interviewDate==""){
+			$("#interviewDate").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewDateErr").html( "You have to selet an interview date" );
+				    $("#interviewDateErr").css("margin-bottom", "10px");
+				    $("#interviewDateErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewDate").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewDateErr").html( "" );
+				    $("#interviewDateErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
+		interviewTime = $( "#interviewTime option:selected" ).text();
+		if(interviewTime==" -- select a time slot-- "){
+			$("#interviewTime").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewTimeErr").html( "You have to selet an interview date" );
+				    $("#interviewTimeErr").css("margin-bottom", "10px");
+				    $("#interviewTimeErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewTime").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewTimeErr").html( "" );
+				    $("#interviewTimeErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
 
 		if (isValid==true){
 			$('#Interview').html(interviewDate+"  "+interviewTime+"   "+interviewForm);
@@ -418,9 +493,25 @@ $( document ).ready(function() {
 
 
 		reasons = $('#reasons').val();
-		if(reasons=="") isValid = false;
-		questions = $('#questions').val();
+		if(reasons==""){
+			$("#reasons").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#reasonsErr").html( "You have to answer this question" );
+				    $("#reasonsErr").css("margin-bottom", "10px");
+				    $("#reasonsErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#reasons").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#reasonsErr").html( "" );
+				    $("#reasonsErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
 		
+		questions = $('#questions').val();
+		if(questions=="") questions = "N/A";
 
 		if(isValid==true){
 			$('#Reasons').html(reasons);
