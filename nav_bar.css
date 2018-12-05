@@ -350,7 +350,7 @@ div.navbar > ul.navbar-container {
 }
 div.navbar > ul > li.nav-item {
   float: right;
-  background-color: rgba(0, 0, 0, 0.1);
+  /*background-color: rgba(0, 0, 0, 0.1);*/
   transition: all 0.5s ease;
 }
 div.navbar > ul > li.active {
