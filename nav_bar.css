@@ -183,10 +183,9 @@ form .inner-form .input-field input:hover, .s006 form .inner-form .input-field i
   display: block;
 }
 
-.img-based {
-
-  position: relative;
-  float: right;
+form.img-based {
+  position: absolute;
+  float: left;
   height: 70px;
   background: #fff;
   font-size: 18px;
@@ -198,8 +197,9 @@ form .inner-form .input-field input:hover, .s006 form .inner-form .input-field i
   border: 0;
   cursor: pointer;
   width: 150;
-  margin-right: 18%;
-  margin-top: 120;
+  margin-top: 15%;
+  margin-left: 30%;
+  
 }
 
 form .inner-form .input-field .btn-search {
