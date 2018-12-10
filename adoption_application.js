@@ -7,6 +7,33 @@ $( document ).ready(function() {
 	var firstName, lastName, email, phone, address, city, state, zipcode;
 	var interviewForm, interviewDate, interviewTime;
 	var reasons, questions;
+	var fullName, wholeAddress;
+
+	// Initialize Firebase
+    var config = {
+      	apiKey: "AIzaSyBCfcobOGbLtkYKlY0DYObKzFpgW8jnOdU",
+	    authDomain: "pet-7ba63.firebaseapp.com",
+	    databaseURL: "https://pet-7ba63.firebaseio.com",
+	    projectId: "pet-7ba63",
+	    storageBucket: "pet-7ba63.appspot.com",
+	    messagingSenderId: "862948521361"
+    };
+    firebase.initializeApp(config);
+    // Get a reference to the database service(Realtime Database)
+    var db = firebase.database();
+	var selectedPetRef = db.ref("selectedPet");
+	var petIdsRef = db.ref("petIds");
+
+    //load data from firebase
+    selectedPetRef.on("value", function(snapshot) {
+		var selectedPetIndex = snapshot.val()["selectedPet"];
+		petIdsRef.child(selectedPetIndex).on("value", function(snapshot) {
+			var selectedPetData = snapshot.val();
+			$("#petName").html("Adopt " + selectedPetData["petName"]);
+			$("#question1").html("Why you want to adopt " + selectedPetData["petName"]+"?");
+			$("#question2").html("Do you have any questions about " + selectedPetData["petName"]+"? (ex vaccine record)");
+		});	
+  	});
 
 	// Make sure when pressing enter key while filling the form, it won't automatically press submit button
 	$(document).keypress(function(event){
@@ -23,7 +50,6 @@ $( document ).ready(function() {
 		window.location.href='./index.html';
 	});
 
-	/* //the interface of UI is weird
 	//autocomplete
     $( function() {
       
@@ -40,18 +66,186 @@ $( document ).ready(function() {
     	$(".ui-helper-hidden-accessible").hide();
 
 	});
-*/
+
+    //datepicker
+    $( function() {
+		$( "#interviewDate" ).datepicker({ minDate: 0, maxDate: "+1M" });
+	} );
+
+	/****************Reference****************
+	* Phone Number - Auto Format
+	* WBTraughber
+	* https://codepen.io/TalonBauer/pen/lvpBI
+	******************************************/
+	function phone_formatting(ele,restore) {
+	  var new_number,
+	      selection_start = ele.selectionStart,
+	      selection_end = ele.selectionEnd,
+	      number = ele.value.replace(/\D/g,'');
+	  
+	  // automatically add dashes
+	  if (number.length > 2) {
+	    // matches: 123 || 123-4 || 123-45
+	    new_number = number.substring(0,3) + '-';
+	    if (number.length === 4 || number.length === 5) {
+	      // matches: 123-4 || 123-45
+	      new_number += number.substr(3);
+	    }
+	    else if (number.length > 5) {
+	      // matches: 123-456 || 123-456-7 || 123-456-789
+	      new_number += number.substring(3,6) + '-';
+	    }
+	    if (number.length > 6) {
+	      // matches: 123-456-7 || 123-456-789 || 123-456-7890
+	      new_number += number.substring(6);
+	    }
+	  }
+	  else {
+	    new_number = number;
+	  }
+	  
+	  // if value is heigher than 12, last number is dropped
+	  // if inserting a number before the last character, numbers
+	  // are shifted right, only 12 characters will show
+	  ele.value =  (new_number.length > 12) ? new_number.substring(0,12) : new_number;
+	  
+	  // restore cursor selection,
+	  // prevent it from going to the end
+	  // UNLESS
+	  // cursor was at the end AND a dash was added
+	  
+	  if (new_number.slice(-1) === '-' && restore === false
+	      && (new_number.length === 8 && selection_end === 7)
+	          || (new_number.length === 4 && selection_end === 3)) {
+	      selection_start = new_number.length;
+	      selection_end = new_number.length;
+	  }
+	  else if (restore === 'revert') {
+	    selection_start--;
+	    selection_end--;
+	  }
+	  ele.setSelectionRange(selection_start, selection_end);
+	}
+	 
+	function phone_number_check(field,e) {
+	  var key_code = e.keyCode,
+	      key_string = String.fromCharCode(key_code),
+	      press_delete = false,
+	      dash_key = 189,
+	      delete_key = [8,46],
+	      direction_key = [33,34,35,36,37,38,39,40],
+	      selection_end = field.selectionEnd;
+	  
+	  // delete key was pressed
+	  if (delete_key.indexOf(key_code) > -1) {
+	    press_delete = true;
+	  }
+	  
+	  // only force formatting is a number or delete key was pressed
+	  if (key_string.match(/^\d+$/) || press_delete) {
+	    phone_formatting(field,press_delete);
+	  }
+	  // do nothing for direction keys, keep their default actions
+	  else if(direction_key.indexOf(key_code) > -1) {
+	    // do nothing
+	  }
+	  else if(dash_key === key_code) {
+	    if (selection_end === field.value.length) {
+	      field.value = field.value.slice(0,-1)
+	    }
+	    else {
+	      field.value = field.value.substring(0,(selection_end - 1)) + field.value.substr(selection_end)
+	      field.selectionEnd = selection_end - 1;
+	    }
+	  }
+	  // all other non numerical key presses, remove their value
+	  else {
+	    e.preventDefault();
+	//    field.value = field.value.replace(/[^0-9\-]/g,'')
+	    phone_formatting(field,'revert');
+	  }
+
+	}
+
+	document.getElementById('phone').onkeyup = function(e) {
+	  phone_number_check(this,e);
+	}
+	/****************Reference End****************/
+
+	/****************Reference****************
+	* Form Validation Using jQuery and Regular Expressions
+	* http://www.designchemical.com/blog/index.php/jquery/form-validation-using-jquery-and-regular-expressions/
+	******************************************/
+	function checkEmail(input){
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+		if(input.length==0){
+			$("#email").change(function () {
+			    $(this).css("border", "1px solid #EF4F32");
+			    $("#emailErr").html( "Email should not be empty" );
+			    $("#emailErr").css("margin-bottom", "10px");
+			    $("#emailErr").css("color", "#EF4F32");
+			}).trigger("change");
+			return false;
+		}else if(!emailReg.test(input)){
+			$("#email").change(function () {
+			    $(this).css("border", "1px solid #EF4F32");
+			    $("#emailErr").html( "Email is invalid" );
+			    $("#emailErr").css("margin-bottom", "10px");
+			    $("#emailErr").css("color", "#EF4F32");
+			}).trigger("change");
+			return false;
+		}else {
+			
+			$("#email").change(function () {
+				$(this).css("border", "1px solid #ccc");
+				$("#emailErr").html( "" );
+				$("#emailErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+		return true;
+	}
+	/****************Reference End****************/
+
+	function checkPhoneNumber(input){
+		if(input.length==0){
+			$("#phone").change(function () {
+			    $(this).css("border", "1px solid #EF4F32");
+			    $("#phoneNumberErr").html( "Phone number should not be empty" );
+			    $("#phoneNumberErr").css("margin-bottom", "10px");
+			    $("#phoneNumberErr").css("color", "#EF4F32");
+			}).trigger("change");
+			return false;
+		}else if(input.length!=12){
+			$("#phone").change(function () {
+			    $(this).css("border", "1px solid #EF4F32");
+			    $("#phoneNumberErr").html( "Phone number is invalid" );
+			    $("#phoneNumberErr").css("margin-bottom", "10px");
+			    $("#phoneNumberErr").css("color", "#EF4F32");
+			}).trigger("change");
+			return false;
+		}else{
+			$("#phone").change(function () {
+				$(this).css("border", "1px solid #ccc");
+				$("#phoneNumberErr").html( "" );
+				$("#phoneNumberErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+		return true;
+	}
+
 	function checkZipcode(input){
 		if(input.length==0){
 			$("#zipcode").change(function () {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#zipcodeErr").html( "Zipcode should not be empty" );
+			    $("#zipcodeErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else if(input.length!=5){
 			$("#zipcode").change(function () {
 			    $(this).css("border", "1px solid #EF4F32");
 			    $("#zipcodeErr").html( "Zipcode should be a 5-digit number" );
+			    $("#zipcodeErr").css("color", "#EF4F32");
 			}).trigger("change");
 			return false;
 		}else{
@@ -63,6 +257,7 @@ $( document ).ready(function() {
 					$("#zipcode").change(function () {
 					    $(this).css("border", "1px solid #EF4F32");
 					    $("#zipcodeErr").html( "Zipcode should be a 5-digit number" );
+					    $("#zipcodeErr").css("color", "#EF4F32");
 					}).trigger("change");
 					return false;
 				}
@@ -75,6 +270,11 @@ $( document ).ready(function() {
 		return true;
 	}
 
+/****************Reference****************
+* Multi Step Form with Progress Bar using jQuery and CSS3
+* Atakan Goktepe
+* https://codepen.io/atakan/pen/gqbIz?editors=1000
+******************************************/
     //click on information page next btn
 	$(".first_page").click(function(){
 
@@ -85,6 +285,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#firstNameErr").html( "First name should not be empty" );
 				    $("#firstNameErr").css("margin-bottom", "10px");
+				    $("#firstNameErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -100,6 +301,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#lastNameErr").html( "Last name should not be empty" );
 				    $("#lastNameErr").css("margin-bottom", "10px");
+				    $("#lastNameErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -111,12 +313,10 @@ $( document ).ready(function() {
 		}
 
 		email = $('#email').val();
-		//if(checkEmail(email)==false) isValid = false;
-		if(email=="") isValid = false;
+		if(checkEmail(email)==false) isValid = false;
 
 		phone = $('#phone').val();
-		//if(checkPhoneNumber(phone)==false) isValid = false;
-		if(phone=="") isValid = false;
+		if(checkPhoneNumber(phone)==false) isValid = false;
 
 		address = $('#address').val();
 		if(address==""){
@@ -124,6 +324,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#addressErr").html( "Address should not be empty" );
 				    $("#addressErr").css("margin-bottom", "10px");
+				    $("#addressErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -140,6 +341,7 @@ $( document ).ready(function() {
 				    $(this).css("border", "1px solid #EF4F32");
 				    $("#cityErr").html( "City should not be empty" );
 				    $("#cityErr").css("margin-bottom", "10px");
+				    $("#cityErr").css("color", "#EF4F32");
 			}).trigger("change");
 			isValid = false;
 		}else{
@@ -150,16 +352,33 @@ $( document ).ready(function() {
 			}).trigger("change");
 		}
 		state = $('#state').val();
-		if(state=="") isValid = false;
+		if(state==""){
+			$("#state").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#stateErr").html( "State should not be empty" );
+				    $("#stateErr").css("margin-bottom", "10px");
+				    $("#stateErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#state").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#stateErr").html( "" );
+				    $("#stateErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
 		zipcode = $('#zipcode').val();
 		if(checkZipcode(zipcode)==false) isValid = false;
 
 
 		if (isValid==true){
-			$('#Name').html(firstName+" "+lastName);
+			fullName = firstName+" "+lastName;
+			wholeAddress = address+", "+city+", "+state+" "+zipcode;
+			$('#Name').html(fullName);
 			$('#Email').html(email);
 			$('#Phone').html(phone);
-			$('#Address').html(address+", "+city+", "+state+", "+zipcode);
+			$('#Address').html(wholeAddress);
 
 			if(animating) return false;
 			animating = true;
@@ -197,18 +416,68 @@ $( document ).ready(function() {
 			});
 		}
 	});
+	
+	//Figure this out
+	$( function() {
+    	$( "#interviewForm" ).selectmenu();
+		$( "#interviewTime" ).selectmenu();
+  	});
 
 	//click on interview page next btn
 	$(".second_page").click(function(){
 
 		var isValid = true;
-		interviewForm = $( "#interviewForm option:selected" ).text();
-		if(interviewForm==" -- select one -- ") isValid = false;
-		interviewDate = $('#interviewDate').val();
-		if(interviewDate=="") isValid = false;
-		interviewTime = $( "#interviewTime option:selected" ).text();
-		if(interviewTime==" -- select a time slot-- ") isValid = false;
 
+		interviewForm = $( "#interviewForm option:selected" ).text();
+		if(interviewForm==" -- select one -- "){
+			$("#interviewForm").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewFormErr").html( "You have to selet an interview form" );
+				    $("#interviewFormErr").css("margin-bottom", "10px");
+				    $("#interviewFormErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewForm").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewFormErr").html( "" );
+				    $("#interviewFormErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
+		interviewDate = $('#interviewDate').val();
+		if(interviewDate==""){
+			$("#interviewDate").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewDateErr").html( "You have to selet an interview date" );
+				    $("#interviewDateErr").css("margin-bottom", "10px");
+				    $("#interviewDateErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewDate").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewDateErr").html( "" );
+				    $("#interviewDateErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
+		interviewTime = $( "#interviewTime option:selected" ).text();
+		if(interviewTime==" -- select a time slot-- "){
+			$("#interviewTime").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#interviewTimeErr").html( "You have to selet an interview date" );
+				    $("#interviewTimeErr").css("margin-bottom", "10px");
+				    $("#interviewTimeErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#interviewTime").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#interviewTimeErr").html( "" );
+				    $("#interviewTimeErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
 
 		if (isValid==true){
 			$('#Interview').html(interviewDate+"  "+interviewTime+"   "+interviewForm);
@@ -256,9 +525,25 @@ $( document ).ready(function() {
 
 
 		reasons = $('#reasons').val();
-		if(reasons=="") isValid = false;
-		questions = $('#questions').val();
+		if(reasons==""){
+			$("#reasons").change(function () {
+				    $(this).css("border", "1px solid #EF4F32");
+				    $("#reasonsErr").html( "You have to answer this question" );
+				    $("#reasonsErr").css("margin-bottom", "10px");
+				    $("#reasonsErr").css("color", "#EF4F32");
+			}).trigger("change");
+			isValid = false;
+		}else{
+			$("#reasons").change(function () {
+				    $(this).css("border", "1px solid #ccc");
+				    $("#reasonsErr").html( "" );
+				    $("#reasonsErr").css("margin-bottom", "0px");
+			}).trigger("change");
+		}
+
 		
+		questions = $('#questions').val();
+		if(questions=="") questions = "N/A";
 
 		if(isValid==true){
 			$('#Reasons').html(reasons);
@@ -336,13 +621,12 @@ $( document ).ready(function() {
 			easing: 'easeInOutBack'
 		});
 	});
+	/****************Reference End****************/
 
 	$(".submit").click(function(){
 		window.location.href='./confirmation_page.html';
 		return false;
 	})
-
-
 });
 
 function selectPet(petID) {
