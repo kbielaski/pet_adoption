@@ -183,6 +183,25 @@ form .inner-form .input-field input:hover, .s006 form .inner-form .input-field i
   display: block;
 }
 
+.img-based {
+
+  position: relative;
+  float: right;
+  height: 70px;
+  background: #fff;
+  font-size: 18px;
+  border-radius: 34px;
+  box-shadow: none;
+  outline: 0;
+  color: white;
+  background-color: #ee6e73;
+  border: 0;
+  cursor: pointer;
+  width: 150;
+  margin-right: 18%;
+  margin-top: 120;
+}
+
 form .inner-form .input-field .btn-search {
   color: white;
   background-color: #ee6e73;
